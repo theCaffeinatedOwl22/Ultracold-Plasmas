@@ -5,7 +5,7 @@ function [gL] = calcLandeGFac(j,l,s)
 % quantum number.
 
 %% Calculate g-factor
-gL = 1+(j*(j+1)+s*(s+1)-l(l+1))/(2*j*(j+1));
+gL = 1+(j.*(j+1)+s.*(s+1)-l.*(l+1))/(2.*j.*(j+1));
 
 end
 

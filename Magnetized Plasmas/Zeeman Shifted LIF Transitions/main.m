@@ -10,5 +10,12 @@ close all
 %% User Inputs
 % Specify path location for sub programs
 addpath('C:\Users\grant\Documents\GitHub\Ultracold-Plasmas\Magnetized Plasmas\Zeeman Shifted LIF Transitions\subPrograms');
+% Define Sr+ imaging transitions
+[t] = defineTransitions();
+% Define magnetic field
+[B] = defineMagneticField();
 
-%% Program
+%% Plot Zeeman shifts as a function of magnetic field
+plotShiftVsField(t)
+
+%% Plot how we expect spectra to look
