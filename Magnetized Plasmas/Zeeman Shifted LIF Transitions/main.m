@@ -10,6 +10,7 @@ close all
 %% User Inputs
 %%%   Program Options %%%
 flag.plotShiftVsField = 0;
+flag.plotSpectraVsLocation = 1;
 % Specify path location for sub programs
 addpath('C:\Users\grant\Documents\GitHub\Ultracold-Plasmas\Magnetized Plasmas\Zeeman Shifted LIF Transitions\subPrograms');
 % Define Sr+ imaging transitions
@@ -19,8 +20,8 @@ addpath('C:\Users\grant\Documents\GitHub\Ultracold-Plasmas\Magnetized Plasmas\Ze
 % Specify which transitions to plot
 trans = [3 4]; % [PiMinus, PiPlus, SigPlus, SigMinus] specify indices
 % Specify locations for which spectra are plotted
-loc.x = [-3 0 3]; % units = mm
-loc.y = [0 0 0]; % units = mm
+loc.x = round(linspace(-5,5,7),2); % units = mm
+loc.y = zeros(size(loc.x)); % units = mm
 % Specify ion temperature
 Ti = 1; % units = K
 
@@ -30,5 +31,7 @@ if flag.plotShiftVsField == 1
 end
 
 %% Plot how we expect spectra to look
-plotSpectraVsLocation(t,B,loc,Ti,trans)
+if flag.plotSpectraVsLocation == 1
+    plotSpectraVsLocation(t(trans),B,loc,Ti)
+end
 
