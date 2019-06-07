@@ -8,8 +8,6 @@ clear
 close all
 
 %% User Inputs
-%%%   Program Options %%%
-flag.plotShiftVsField = 0;
 % Specify path location for sub programs
 addpath('C:\Users\grant\Documents\GitHub\Ultracold-Plasmas\Magnetized Plasmas\Zeeman Shifted LIF Transitions\subPrograms');
 % Define Sr+ imaging transitions
@@ -25,10 +23,8 @@ loc.y = [0 0 0]; % units = mm
 Ti = 1; % units = K
 
 %% Plot Zeeman shifts as a function of magnetic field
-if flag.plotShiftVsField == 1
-    plotShiftVsField(t)
-end
+plotShiftVsField(t)
 
 %% Plot how we expect spectra to look
-plotSpectraVsLocation(t,B,loc,Ti,trans)
+plotSpe
 
