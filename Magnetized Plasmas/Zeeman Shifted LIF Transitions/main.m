@@ -11,7 +11,7 @@
 
 
 % See OneNote entry for 06/05/19 for detailed discussion of imaging
-% magnetized plasmas.
+% magnetized plasmas...
 
 %% Initiate Program
 % Clear workspace
