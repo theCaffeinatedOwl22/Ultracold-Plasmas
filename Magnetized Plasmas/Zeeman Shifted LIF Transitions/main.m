@@ -1,4 +1,4 @@
-%% Program Notes
+ %% Program Notes
 % This program has several different features that calculate important
 % quantities related to using LIF imaging on a magnetized UNP. 
 
@@ -19,7 +19,7 @@ clc
 clear
 close all
 % Specify path location for sub programs
-addpath('C:\Users\grant\Documents\GitHub\Ultracold-Plasmas\Magnetized Plasmas\Zeeman Shifted LIF Transitions\subPrograms');
+addpath('C:\Users\Grant Gorman\Documents\GitHub\Ultracold-Plasmas\Magnetized Plasmas\Zeeman Shifted LIF Transitions\subPrograms');
 
 %% User Inputs
 %%%   General Options   %%%
@@ -36,9 +36,10 @@ flag.plotSpectraVsLocation = 1;
 % Specify which transitions to plot
 trans = [1 2 3 4]; % [PiMinus, PiPlus, SigPlus, SigMinus] specify indices
 
-% Specify locations for which spectra are plotted
+% Specify locations/frequencies for which spectra are plotted
 loc.x = round(linspace(-5,5,7),2); % units = mm
-loc.y = zeros(size(loc.x)); % units = mm
+loc.y = -round(linspace(-5,5,7),2); % units = mm
+freqForPlot = linspace(-500e6,500e6,1000);
 
 % Specify ion temperature
 Ti = 1; % units = K
@@ -50,6 +51,6 @@ end
 
 %% Plot how we expect spectra to look
 if flag.plotSpectraVsLocation == 1
-    [f,axSpec,ax,anX,anTitle,axLvlDiagram] = plotSpectraVsLocation(t(trans),B,loc,Ti);
+    [f,axSpec,ax,anX,anTitle,axLvlDiagram] = plotSpectraVsLocation(t(trans),B,loc,Ti,freqForPlot);
 end
 

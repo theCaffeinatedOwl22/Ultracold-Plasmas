@@ -1,4 +1,4 @@
-function [f,axSpec,ax,anX,anTitle,axLvlDiagram] = plotSpectraVsLocation(t,B,loc,Ti)
+function [f,axSpec,ax,anX,anTitle,axLvlDiagram] = plotSpectraVsLocation(t,B,loc,Ti,freqForPlot)
 %% Program Notes
 % This program creates a figure of subplots containing Zeeman-shifted Voigt
 % profiles for each location contained within 'loc' and whose width is 
@@ -26,7 +26,7 @@ function [f,axSpec,ax,anX,anTitle,axLvlDiagram] = plotSpectraVsLocation(t,B,loc,
 
 %% Calculate spectra for each position and place in data structure
 % Define frequency range for plotting Voigt profiles
-freqForPlot = linspace(-250e6,250e6,1000);
+% freqForPlot = linspace(-250e6,250e6,1000);
 % Place plot information within data structure
 %   - Note that this program creates a 4x2 grid of subplots. The following
 %     set of nested for loops iterates over each set of axes within the
@@ -152,7 +152,7 @@ anTitle.EdgeColor = 'none';
 
 %% Add LIF transition level diagram to figure 
 axLvlDiagram = subplot('Position',[0.026515151515152,0.534970238095237,0.247294372294372,0.336309523809524]);
-image(imread('C:\Users\grant\Documents\GitHub\Ultracold-Plasmas\Magnetized Plasmas\Zeeman Shifted LIF Transitions\subPrograms\levelDiagram.PNG'));
+image(imread('C:\Users\Grant Gorman\Documents\GitHub\Ultracold-Plasmas\Magnetized Plasmas\Zeeman Shifted LIF Transitions\subPrograms\levelDiagram.PNG'));
 axLvlDiagram.XTick = [];
 axLvlDiagram.YTick = [];
 
