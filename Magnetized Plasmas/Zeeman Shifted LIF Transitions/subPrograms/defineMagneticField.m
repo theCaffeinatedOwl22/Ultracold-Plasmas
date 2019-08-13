@@ -10,7 +10,7 @@ function [B] = defineMagneticField()
 
 %% Define magnetic field
 b = 1.15; % magnetic field gradient with units T/m
-h = 1.5; % ratio between initial plasma size on the x and y axes
+h = 2; % ratio between initial plasma size on the x and y axes
 B = @(x,y) b.*sqrt(x.^2+(y/h).^2);
 
 end
