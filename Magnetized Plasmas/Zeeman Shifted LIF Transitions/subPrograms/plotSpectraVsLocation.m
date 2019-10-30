@@ -152,7 +152,7 @@ anTitle.EdgeColor = 'none';
 
 %% Add LIF transition level diagram to figure 
 axLvlDiagram = subplot('Position',[0.026515151515152,0.534970238095237,0.247294372294372,0.336309523809524]);
-image(imread('C:\Users\grant\Documents\GitHub\Ultracold-Plasmas\Magnetized Plasmas\Zeeman Shifted LIF Transitions\subPrograms\levelDiagram.PNG'));
+image(imread('C:\Users\Grant Gorman\Documents\GitHub\Ultracold-Plasmas\Magnetized Plasmas\Zeeman Shifted LIF Transitions\subPrograms\levelDiagram.PNG'));
 axLvlDiagram.XTick = [];
 axLvlDiagram.YTick = [];
 
