@@ -1,5 +1,5 @@
 clc
-clear all
+clear
 close all
 
 %% Testing whether single-loop field calculations match on-axis results
@@ -10,24 +10,48 @@ close all
 % origin.
 
 
-z = linspace(0,1000,1e4);   % calculate field using my function for a loop at z0 = 0
-p = linspace(0,0,1e4);
-z0 = 0;
-[Bp,Bz] = fieldFromSingleCurrentLoop(z,p,0);
+z = linspace(-5,5,1e4);   % calculate field using my function for a loop at z0 = 0
+p = linspace(.001,.001,1e4);
+z0 = 50;
+[Bp,Bz] = fieldFromSingleCurrentLoop(z,p,z0);
 
 
 fig = figure(1);
 fig.Position = [210.5000  220.5000  560.0000  420.0000];
 plot(z,Bz,'LineWidth',1.5)
 hold on
-plot(z,1./(2.*(1+z.^2).^(3/2)))
+plot(z,1./(2.*(1+(z-z0).^2).^(3/2)))
+hold on
+plot(z,Bp,'LineWidth',1.5)
 ax = gca;
 ax.FontSize = 12;
 ax.YScale = 'log';
 xlabel('z/a')
 ylabel('B / (\mu_0I/a)')
 title('Field Along Symmetry Axis for \rho = 0')
-legend({'Exact Model','Limiting Case'})
+legend({'Exact Model','Limiting Case','B_p'})
+
+%% Testing whether Bp behaves properly at relevant distances
+
+z = linspace(0,0,1e4);   % calculate field using my function for a loop at z0 = 0
+p = linspace(.001,.5,1e4);
+z0 = 50;
+[Bp,Bz] = fieldFromSingleCurrentLoop(z,p,z0);
+
+
+fig = figure(2);
+fig.Position = [210.5000  220.5000  560.0000  420.0000];
+plot(p,Bz,'LineWidth',1.5)
+hold on
+plot(p,Bp,'LineWidth',1.5)
+ax = gca;
+ax.FontSize = 12;
+ax.YScale = 'log';
+xlabel('p/a')
+ylabel('B / (\mu_0I/a)')
+title('Field Along Symmetry Axis for z = 0')
+legend({'Bz','B_p'})
+
 
 %% Testing single-loop code near, but not on, symmetry axis
 
@@ -43,7 +67,7 @@ z0 = 0;
 [Bp3,Bz3] = fieldFromSingleCurrentLoop(z,p3,0);
 [Bp4,Bz4] = fieldFromSingleCurrentLoop(z,p4,0);
 
-fig = figure(2);
+fig = figure(3);
 fig.Position = [210.5000  220.5000  560.0000  420.0000];
 plot(z,Bp,'LineWidth',1.5)
 hold on

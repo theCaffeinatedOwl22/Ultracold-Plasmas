@@ -21,7 +21,7 @@ function [] = fieldForQuadrupoleConfig()
 numWraps = 9;
 zPos = zeros(1,numWraps);
 for ii = 1:numWraps
-    zPos(ii) = 35+4*(ii-.5);    % in mm
+    zPos(ii) = 30+4*(ii-.5);    % in mm
 end
 zPos = [-zPos zPos];
 
@@ -38,37 +38,54 @@ radii = radii(:);
 pol = ones(size(zPos));
 pol(logical(zPos>0)) = pol(logical(zPos>0)).*-1;
 
-xForPlot = linspace(-5,5,1000);
-yForPlot = linspace(-5,5,1000);
+xForPlot = linspace(-5,5,600);
+yForPlot = linspace(-5,5,600);
 
-[xForPlot,yForPlot] = meshgrid(xForPlot,yForPlot);
+[xForMesh,yForMesh] = meshgrid(xForPlot,yForPlot);
 
-
+figure
+plot(zPos,radii,'.','MarkerSize',20)
+ylim([-50 50])
 
 %% Sum over each current loop
 
-BzSum = zeros(length(yForPlot),length(xForPlot));
-BpSum = zeros(length(yForPlot),length(xForPlot));
+BzSum = zeros(length(yForMesh),length(xForMesh));
+BpSum = zeros(length(yForMesh),length(xForMesh));
 
-
+u0 = pi*4e-7;
+amps = 80;
 
 for ii = 1:length(radii)
-    xDimUnits = xForPlot./radii(ii);
-    yDimUnits = yForPlot./radii(ii);
+    xDimUnits = xForMesh./radii(ii);
+    yDimUnits = abs(yForMesh./radii(ii));
     zPosDimUnits = zPos(ii)/radii(ii);
     
     [Bp, Bz] = fieldFromSingleCurrentLoop(xDimUnits,yDimUnits,zPosDimUnits,pol(ii));
-    BpSum = BpSum+Bp;
-    BzSum = BzSum+Bz;
+    BpSum = BpSum+Bp.*u0.*amps./radii(ii).*1e4.*1e3;
+    BzSum = BzSum+Bz.*u0.*amps./radii(ii).*1e4.*1e3;
     
 end
 
 Btot = sqrt(BpSum.^2+BzSum.^2);
 
 figure
-imagesc(Btot)
+imagesc(xForPlot,yForPlot,Btot)
 colorbar
 ax = gca;
-ax.CLim = [0 100];
+ax.YDir = 'normal';
+
+figure
+plot(xForPlot,BzSum(round(end/2),:))
+hold on
+plot(xForPlot,BpSum(round(end/2),:))
+xlabel('z')
+legend({'Bz','Bp'})
+
+figure
+plot(yForPlot,BzSum(:,round(end/2)))
+hold on
+plot(yForPlot,BpSum(:,round(end/2)))
+xlabel('p')
+legend({'Bz','Bp'})
 
 end

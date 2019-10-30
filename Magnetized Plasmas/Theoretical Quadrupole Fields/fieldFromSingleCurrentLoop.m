@@ -34,9 +34,10 @@ function [Bp,Bz] = fieldFromSingleCurrentLoop(z,p,z0,pol)
     
 
 %% Define variables for calculation
+z = z-z0;
 
-A = sqrt(1+p.^2+(z-z0).^2-2.*p);
-B = sqrt(1+p.^2+(z-z0).^2+2.*p);
+A = sqrt(1+p.^2+z.^2-2.*p);
+B = sqrt(1+p.^2+z.^2+2.*p);
 k = abs(1-A.^2./B.^2);
 
 %% Evaluate elliptic integrals
@@ -45,7 +46,7 @@ k = abs(1-A.^2./B.^2);
 
 %% Calculate field com
 
-Bp = z./(2.*pi.*A.^2.*B.*p).*((1+p.^2+z.^2).*E-A.^2.*K);
+Bp = abs(z./(2.*pi.*A.^2.*B.*p).*((1+p.^2+z.^2).*E-A.^2.*K));
 Bz = 1./(2.*pi.*A.^2.*B).*((1-p.^2-z.^2).*E+A.^2.*K);
 
 if nargin == 4
