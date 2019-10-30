@@ -10,9 +10,9 @@ close all
 % origin.
 
 
-z = linspace(-5,5,1e4);   % calculate field using my function for a loop at z0 = 0
-p = linspace(.001,.001,1e4);
-z0 = 50;
+z = linspace(-50,50,1e4);   % calculate field using my function for a loop at z0 = 0
+p = linspace(0,0,1e4);
+z0 = 0;
 [Bp,Bz] = fieldFromSingleCurrentLoop(z,p,z0);
 
 
@@ -27,9 +27,9 @@ ax = gca;
 ax.FontSize = 12;
 ax.YScale = 'log';
 xlabel('z/a')
-ylabel('B / (\mu_0I/a)')
+ylabel('B_z / (\mu_0I/a)')
 title('Field Along Symmetry Axis for \rho = 0')
-legend({'Exact Model','Limiting Case','B_p'})
+legend({'Exact Model','Limiting Case'})
 
 %% Testing whether Bp behaves properly at relevant distances
 
@@ -54,36 +54,37 @@ legend({'Bz','B_p'})
 
 
 %% Testing single-loop code near, but not on, symmetry axis
-
-z = linspace(0,1000,1e4);   % calculate field using my function for a loop at z0 = 0
-p1 = linspace(.04,.04,1e4);
+close all
+z = linspace(0,50,1e4);   % calculate field using my function for a loop at z0 = 0
+p1 = linspace(.0001,.0001,1e4);
 p2 = linspace(.001,.001,1e4);
 p3 = linspace(.0001,.0001,1e4);
 p4 = linspace(.00001,.00001,1e4);
 
-z0 = 0;
-[Bp,Bz] = fieldFromSingleCurrentLoop(z,p1,0);
-[Bp2,Bz2] = fieldFromSingleCurrentLoop(z,p2,0);
-[Bp3,Bz3] = fieldFromSingleCurrentLoop(z,p3,0);
-[Bp4,Bz4] = fieldFromSingleCurrentLoop(z,p4,0);
+z0 = 50;
+[Bp,Bz] = fieldFromSingleCurrentLoop(z,p1,z0);
+[Bp2,Bz2] = fieldFromSingleCurrentLoop(z,p2,z0);
+[Bp3,Bz3] = fieldFromSingleCurrentLoop(z,p3,z0);
+[Bp4,Bz4] = fieldFromSingleCurrentLoop(z,p4,z0);
 
 fig = figure(3);
 fig.Position = [210.5000  220.5000  560.0000  420.0000];
 plot(z,Bp,'LineWidth',1.5)
 hold on
-plot(z,3.*z.*p1./(4.*(1+z.^2).^(5/2)),'LineWidth',1.5)
+plot(z,3.*(z-z0).*p1./(4.*(1+(z-z0).^2).^(5/2)),'LineWidth',1.5)
 hold on
-plot(z,Bp2,'LineWidth',1.5)
-plot(z,3.*z.*p2./(4.*(1+z.^2).^(5/2)),'LineWidth',1.5)
-plot(z,Bp3,'LineWidth',1.5)
-plot(z,3.*z.*p3./(4.*(1+z.^2).^(5/2)),'LineWidth',1.5)
-plot(z,Bp4,'LineWidth',1.5)
-plot(z,3.*z.*p4./(4.*(1+z.^2).^(5/2)),'LineWidth',1.5)
+% plot(z,Bp2,'LineWidth',1.5)
+% plot(z,3.*z.*p2./(4.*(1+z.^2).^(5/2)),'LineWidth',1.5)
+% plot(z,Bp3,'LineWidth',1.5)
+% plot(z,3.*z.*p3./(4.*(1+z.^2).^(5/2)),'LineWidth',1.5)
+% plot(z,Bp4,'LineWidth',1.5)
+% plot(z,3.*z.*p4./(4.*(1+z.^2).^(5/2)),'LineWidth',1.5)
 
 ax = gca;
 ax.FontSize = 12;
 ax.YScale = 'log';
 xlabel('z/a')
-ylabel('B / (\mu_0I/a)')
-title('Field Near Symmetry Axis for \rho = 0')
-legend({'Model for \rho = .01a','Limiting Case \rho = .01'})
+ylabel('B_\rho / (\mu_0I/a)')
+title('Field Near Symmetry Axis for \rho < a')
+legend({'\rho = .0001','Limiting Case'})
+
