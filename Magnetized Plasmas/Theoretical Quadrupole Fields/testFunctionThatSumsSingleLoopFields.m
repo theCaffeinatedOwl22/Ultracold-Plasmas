@@ -4,12 +4,13 @@ close all
 
 %% Get field calculations
 
-zRange = [-4 4];    % in mm
-pRange = [-4 4];    % in mm
-numZPts = 1000;
-numPPts = 1000;
+zRange = [-4 4];    % range of z-positions (units: mm)
+pRange = [-4 4];    % range of p-positions (units: mm)
+numZPts = 300;      % number of positions to calculate field for within z-range
+numPPts = 300;      % number of positions to calculate field for within p-range
+amps = 80;  % current flowing through each loop (units: A)
 
-s = fieldForQuadrupoleConfig(zRange,pRange,numZPts,numPPts);
+s = fieldForQuadrupoleConfig(zRange,pRange,numZPts,numPPts,amps);
 
 %% Plot coil dimensions
 
@@ -20,7 +21,7 @@ right.zPos = repmat(s.coilZPos(round(end/2)+1:end),2,1);
 right.coilRadii = [s.coilRadii(round(end/2)+1:end); -s.coilRadii(round(end/2)+1:end)];
 
 close all
-fig = figure;
+fig1 = figure;
 plot(left.zPos,left.coilRadii,'.','MarkerSize',15)
 hold on
 plot(right.zPos,right.coilRadii,'.','MarkerSize',15)
@@ -43,7 +44,7 @@ ylim([-50 50])
 close all
 clear fig ax
 
-fig = figure;
+fig2 = figure;
 imagesc(s.zInMM,s.pInMM,s.Bmag)
 c = colorbar;
 ax = gca;
@@ -53,31 +54,31 @@ ylabel('\rho Position (mm)')
 c.Title.String = 'B (G)';
 title('|B| for Experimentally-Relevant Regions')
 
-% open empirical model results - came from model that was constrianed but not completely fixed
-newFig = openfig('C:\Projects\magneticBottling\10.21.19 Update emprical quadrupole magnetic field model\measuredMagneticField.fig');
-
-xForPlot = newFig.Children(8).Children.XData;   % get data from the opened figure
-yForPlot = newFig.Children(8).Children.YData;
-BForPlot = newFig.Children(8).Children.CData;
-
-residual = zeros(size(BForPlot));
-
-for ii = 1:size(residual,1) % rows
-    for jj = 1:size(residual,2) % columns
-        [~,zMinInd] = min(abs(xForPlot(jj) - s.zInMM));
-        [~,pMinInd] = min(abs(yForPlot(ii) - s.pInMM));
-        
-        residual(ii,jj) = (BForPlot(ii,jj)-s.Bmag(pMinInd,zMinInd))./BForPlot(ii,jj)*100;
-    end
-end
-
-figure
-imagesc(residual)
-c = colorbar;
-c.Title.String = '\DeltaB (%)';
-ax = gca;
-ax.FontSize = 12;
-ax.YDir = 'normal';
-xlabel('z (mm)')
-ylabel('\rho (mm)')
-title('(B_e_m_p-B_t_h)/B_e_m_p')
+% % open empirical model results - came from model that was constrianed but not completely fixed
+% newFig = openfig('C:\Projects\magneticBottling\10.21.19 Update emprical quadrupole magnetic field model\measuredMagneticField.fig');
+% 
+% xForPlot = newFig.Children(8).Children.XData;   % get data from the opened figure
+% yForPlot = newFig.Children(8).Children.YData;
+% BForPlot = newFig.Children(8).Children.CData;
+% 
+% residual = zeros(size(BForPlot));
+% 
+% for ii = 1:size(residual,1) % rows
+%     for jj = 1:size(residual,2) % columns
+%         [~,zMinInd] = min(abs(xForPlot(jj) - s.zInMM));
+%         [~,pMinInd] = min(abs(yForPlot(ii) - s.pInMM));
+%         
+%         residual(ii,jj) = (BForPlot(ii,jj)-s.Bmag(pMinInd,zMinInd))./BForPlot(ii,jj)*100;
+%     end
+% end
+% 
+% figure
+% imagesc(residual)
+% c = colorbar;
+% c.Title.String = '\DeltaB (%)';
+% ax = gca;
+% ax.FontSize = 12;
+% ax.YDir = 'normal';
+% xlabel('z (mm)')
+% ylabel('\rho (mm)')
+% title('(B_e_m_p-B_t_h)/B_e_m_p')

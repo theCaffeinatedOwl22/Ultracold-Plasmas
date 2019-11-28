@@ -1,4 +1,4 @@
-function [s] = fieldForQuadrupoleConfig(zRange,pRange,numZPts,numPPts)
+function [s] = fieldForQuadrupoleConfig(zRange,pRange,numZPts,numPPts,amps)
 %% Program Notes
 
     % This program calculates the magnetic field produced by an array of current
@@ -38,16 +38,20 @@ function [s] = fieldForQuadrupoleConfig(zRange,pRange,numZPts,numPPts)
 % Thus, the radius of the inner-most current loop is 1.4 cm plus half the diameter.
 
 numWraps = 9;   % calculate relevant z-positions of the coils.
+wireDiameter = 4;   % units: mm
+coilSpacing = 70;    % units: mm
+coilRadius = 14;    % units: mm
+
 zPos = zeros(1,numWraps);
 for ii = 1:numWraps
-    zPos(ii) = 35+4*(ii-.5);    % in mm
+    zPos(ii) = coilSpacing/2+wireDiameter*(ii-.5);    % in mm
 end
 zPos = [-zPos zPos];    % the coils are symmetrically placed around z=0
 
 numLayers = 7;  % specify coil radii, which depends on which layer the coil belongs to
 radii = zeros(1,numLayers);
 for ii = 1:length(radii)
-    radii(ii) = 14+4*(ii-.5);
+    radii(ii) = coilRadius+wireDiameter*(ii-.5);
 end
 
 [zPos,radii] = meshgrid(zPos,radii);    % ensure that each z-position has a corresponding coil radius
@@ -69,7 +73,6 @@ BzSum = zeros(length(pForMesh),length(zForMesh));   % initialize matrices for fi
 BpSum = zeros(length(pForMesh),length(zForMesh));
 
 u0 = pi*4e-7;   % magnetic permeability of free space in SI units
-amps = 80;  % current through each loop in amps
 
 for ii = 1:length(radii)    % iterate through each current loop
     zDimUnits = zForMesh./radii(ii);    % convert positions to dimensionless units because that's what function uses
@@ -86,16 +89,16 @@ Bmag = sqrt(BpSum.^2+BzSum.^2); % magnetic field strength in G
 
 %% Output information into structure
 s.zInMM = zForPlot; % all distances in mm, all fields in G
-s.pInMM = pForPlot;
-s.zMeshMM = zForMesh;
+s.pInMM = pForPlot; % contains vector of positions on p-axis
+s.zMeshMM = zForMesh;   % meshed positions
 s.pMeshMM = pForMesh;
 
 s.coilZPos = zPos;  % record current loop conditions that fields were derived for
-s.coilRadii = radii;
+s.coilRadii = radii; 
 s.pol = pol;
 
-s.Bp = BpSum;
-s.Bz = BzSum;
-s.Bmag = Bmag;
+s.Bp = BpSum;   % magnetic field along rho axis as a function of rho and z
+s.Bz = BzSum;   % magnetic field along symmetry axis as a function of rho and z
+s.Bmag = Bmag;  % magnitude of field in G as a function of rho and z
 
 end
