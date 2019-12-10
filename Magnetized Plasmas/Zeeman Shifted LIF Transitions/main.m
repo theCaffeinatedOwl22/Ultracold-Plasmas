@@ -23,7 +23,7 @@ addpath('C:\Users\Grant Gorman\Documents\GitHub\Ultracold-Plasmas\Magnetized Pla
 
 %% User Inputs
 %%%   General Options   %%%
-flag.plotShiftVsField = 0;
+flag.plotShiftVsField = 1;
 flag.plotSpectraVsLocation = 1;
 
 % Define Sr+ imaging transitions
