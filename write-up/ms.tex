@@ -1,18 +1,17 @@
-\documentclass[]{article}
+\documentclass[]{article}			% set type of document
 \usepackage[margin=1in]{geometry}	% set all margins to one inch
-\usepackage[utf8]{inputenc}			% basic formatting
+\usepackage[utf8]{inputenc}			% basic formatting package
+\usepackage[english]{babel}			% specify language explicitly
 \usepackage{amsmath}				% more sophisticated math typesetting
-\usepackage[						% biblatex bibliography management
-	backend=bibtex,
-	sorting=none]{biblatex}
-\addbibresource{bibDoc.bib}			% specify bib file
+\usepackage[square,numbers]{natbib}	% bibliography management
+\bibliographystyle{unsrtnat}		% bibliography style
 \usepackage{graphicx}				% extra graphics capability
 
 
-%opening
-\title{Insert title}
-\author{Insert name}
-\date{}
+% options for \maketitle
+\title{Insert title here}
+\author{Insert name here}
+%\date{}	% omit this to put today's date
 
 \begin{document}
 
@@ -20,13 +19,15 @@
 
 \begin{abstract}
 	
-	Abstract text
+	Add abstract here.
 
 \end{abstract}
 
-\section{first section} 
+\section{First section} 
 
-\printbibliography
+text
+
+\bibliography{bibDoc}
 
 \end{document}
 
