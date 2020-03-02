@@ -9,17 +9,17 @@ ind = 0;
 for ii = 1:m
     ind = ind+1;
     styleInd = {'-'};
-        
+
     if (m == 4 || m == 5)
         styleInd = {'-','--'};
         s.style{ii} = styleInd{ind};
-    elseif (m == 6 || m == 7)
+    elseif (m >= 6)
         styleInd = {'-','--','-.'};
         s.style{ii} = styleInd{ind};
     else
         s.style{ii} = styleInd{ind};
     end
-    
+
     if ind >= length(styleInd)
         ind = 0;
     end
