@@ -4,10 +4,10 @@ close all
 
 %% Get field calculations
 
-zRange = [-4 4];    % range of z-positions (units: mm)
-pRange = [-4 4];    % range of p-positions (units: mm)
-numZPts = 300;      % number of positions to calculate field for within z-range
-numPPts = 300;      % number of positions to calculate field for within p-range
+zRange = [-5 5];    % range of z-positions (units: mm)
+pRange = [-5 5];    % range of p-positions (units: mm)
+numZPts = 1000;      % number of positions to calculate field for within z-range
+numPPts = 1000;      % number of positions to calculate field for within p-range
 amps = 80;  % current flowing through each loop (units: A)
 
 s = fieldForQuadrupoleConfig(zRange,pRange,numZPts,numPPts,amps);
@@ -49,6 +49,7 @@ imagesc(s.zInMM,s.pInMM,s.Bmag)
 c = colorbar;
 ax = gca;
 ax.YDir = 'normal';
+% ax.CLim = [-1000 1000];
 xlabel('Z Position (mm)')
 ylabel('\rho Position (mm)')
 c.Title.String = 'B (G)';
