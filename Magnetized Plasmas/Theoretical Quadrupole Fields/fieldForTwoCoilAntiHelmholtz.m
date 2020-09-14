@@ -1,4 +1,4 @@
-function [s] = fieldForQuadrupoleConfig(zRange,pRange,numZPts,numPPts,amps)
+function [s] = fieldForTwoCoilAntiHelmholtz(zRange,pRange,numZPts,numPPts,amps)
 %% Program Notes
 
     % This program calculates the magnetic field produced by an array of current
@@ -37,10 +37,10 @@ function [s] = fieldForQuadrupoleConfig(zRange,pRange,numZPts,numPPts,amps)
 % loops are wrapped around a cylindrial part of the chamber with diameter 2.8 cm.
 % Thus, the radius of the inner-most current loop is 1.4 cm plus half the diameter.
 
-numWraps = 9;   % calculate relevant z-positions of the coils.
-wireDiameter = 4;   % units: mm
-coilSpacing = 70;    % units: mm
-coilRadius = 14;    % units: mm
+numWraps = 1;   % calculate relevant z-positions of the coils.
+wireDiameter = 0;   % units: mm
+coilSpacing = 20;    % units: mm
+coilRadius = 5;    % units: mm
 
 zPos = zeros(1,numWraps);
 for ii = 1:numWraps

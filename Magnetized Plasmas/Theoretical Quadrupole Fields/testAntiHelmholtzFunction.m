@@ -4,13 +4,13 @@ close all
 
 %% Get field calculations
 
-zRange = [-5 5];    % range of z-positions (units: mm)
-pRange = [-5 5];    % range of p-positions (units: mm)
+zRange = [-6 6];    % range of z-positions (units: mm)
+pRange = [-.8 .8];    % range of p-positions (units: mm)
 numZPts = 1000;      % number of positions to calculate field for within z-range
 numPPts = 1000;      % number of positions to calculate field for within p-range
 amps = 80;  % current flowing through each loop (units: A)
 
-s = fieldForQuadrupoleConfig(zRange,pRange,numZPts,numPPts,amps);
+s = fieldForTwoCoilAntiHelmholtz(zRange,pRange,numZPts,numPPts,amps);
 
 %% Plot coil dimensions
 
@@ -45,7 +45,7 @@ close all
 clear fig ax
 
 fig2 = figure;
-imagesc(s.zInMM,s.pInMM,s.Bz)
+imagesc(s.zInMM,s.pInMM,s.Bp)
 c = colorbar;
 ax = gca;
 ax.YDir = 'normal';

@@ -15,6 +15,10 @@ function [Bp,Bz] = fieldFromSingleCurrentLoop(z,p,z0,pol)
     % current through the loop, and a is the radius of the loop. The natural unit for
     % legnth is a.
     
+    % Note that the radial component is typically positive definite in terms of definition, but we
+    % often like to plot on cartesian axes. I have rigged the equations to flip the polarity of the
+    % fields in the radial direction as you cross zero to make it easier for plotting.
+    
     % Inputs:
         % z: position along symmetry axis in units of loop radius a. Must be a double
         % that is the same size as p. Note that the fields are calculated for position z with a coil centered on the
@@ -39,8 +43,8 @@ function [Bp,Bz] = fieldFromSingleCurrentLoop(z,p,z0,pol)
 %% Define variables for calculation
 zRel = z-z0;    % z-position relative to z0 (center of current loop)
 
-A = sqrt(1+p.^2+zRel.^2-2.*p);  % calculate dimensionless parameters relevant for field calculation
-B = sqrt(1+p.^2+zRel.^2+2.*p);
+A = sqrt(1+p.^2+zRel.^2-2.*abs(p));  % calculate dimensionless parameters relevant for field calculation
+B = sqrt(1+p.^2+zRel.^2+2.*abs(p));
 k = abs(1-A.^2./B.^2);
 
 %% Evaluate elliptic integrals
@@ -49,12 +53,13 @@ k = abs(1-A.^2./B.^2);
 
 %% Calculate field com
 
-Bp = abs(zRel./(2.*pi.*A.^2.*B.*p).*((1+p.^2+zRel.^2).*E-A.^2.*K)); % radial component of field
+Bp = zRel./(2.*pi.*A.^2.*B.*p).*((1+p.^2+zRel.^2).*E-A.^2.*K); % radial component of field
 Bz = 1./(2.*pi.*A.^2.*B).*((1-p.^2-zRel.^2).*E+A.^2.*K);    % z-component of field
 
 if nargin == 4  % flip direction of current flow if necessary
     if pol == -1
         Bz = -Bz;
+        Bp = -Bp;
     end
 end
 

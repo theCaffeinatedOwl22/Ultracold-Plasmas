@@ -29,13 +29,7 @@ while test
     currBx = interp2(X,Y,Bx,linex(iter),liney(iter));
     currBy = interp2(X,Y,By,linex(iter),liney(iter));
     
-    if liney(iter) > 0
-%         B = [Bx(indy,indx) By(indy,indx)]; % get magnetic field at current position
         B = [currBx currBy];
-    else
-%         B = [Bx(indy,indx) -By(indy,indx)]; % get magnetic field at current position
-        B = [currBx -currBy]; 
-    end
     b = B./norm(B); % get unit direction of magnetic field
     
     dx = b(1)*dr; % change in x-pos for this iteration
