@@ -9,11 +9,10 @@ function [line] = calcFieldLine(x0,y0,Bx,By,xvec,yvec,dr)
 
 %% Function Notes
 
-% This function computes a magnetic field line corresponding to starting pos
+% This function computes a magnetic field line corresponding to starting pos. The magnetic field
+% units don't matter. Only the field direction is used by this function.
 
 %% Function
-% dr = .001; % define step size for position iteration
-
 linex = x0;
 liney = y0;
 
@@ -24,18 +23,16 @@ iter = 0;
 while test
     iter = iter + 1; % loop counter
     
-%     [~,indx] = min(abs(xvec - linex(iter))); % find element of xvec that is closest to linex
-%     [~,indy] = min(abs(yvec - liney(iter))); % find element of yvec that is closest to liney
-    currBx = interp2(X,Y,Bx,linex(iter),liney(iter));
-    currBy = interp2(X,Y,By,linex(iter),liney(iter));
+    currBx = interp2(X,Y,Bx,linex(iter),liney(iter)); % get local x-comp of B
+    currBy = interp2(X,Y,By,linex(iter),liney(iter)); % get local y-comp of B
     
-        B = [currBx currBy];
+    B = [currBx currBy]; % local magnetic field (units don't matter, just need for direction)
     b = B./norm(B); % get unit direction of magnetic field
     
-    dx = b(1)*dr; % change in x-pos for this iteration
-    dy = b(2)*dr; % change in y-pos for this iteration
+    dx = b(1)*dr; % change in x-pos for this iteration (mm)
+    dy = b(2)*dr; % change in y-pos for this iteration (mm)
     
-    linex(iter+1) = linex(iter) + dx; % increment positions based on local fiel direction
+    linex(iter+1) = linex(iter) + dx; % increment positions based on local field direction
     liney(iter+1) = liney(iter) + dy;
     
     % check whether updated position is still within range xvec and yvec
@@ -46,4 +43,5 @@ end
 
 line.x = linex;
 line.y = liney;
+
 end

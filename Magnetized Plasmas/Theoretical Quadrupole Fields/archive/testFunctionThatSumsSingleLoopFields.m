@@ -45,7 +45,7 @@ close all
 clear fig ax
 
 fig2 = figure;
-imagesc(s.zInMM,s.pInMM,s.Bz)
+imagesc(s.zInMM,s.pInMM,s.Bmag)
 c = colorbar;
 ax = gca;
 ax.YDir = 'normal';
