@@ -36,7 +36,9 @@ fig = figure;
 fig.Position = [510   314   560   420];
 hold on
 for i = 1:length(line)
-    plot(line(i).x,line(i).y,'m','LineWidth',1.5)
+    xdata = line(i).x;
+    ydata = line(i).y;
+    plot(xdata(1:50:end),ydata(1:50:end),'m','LineWidth',2)
 end
 plot([s.coilZPos(1) s.coilZPos(1)],[s.coilRadii(1) -s.coilRadii(2)],'.k','MarkerSize',15)
 plot([s.coilZPos(2) s.coilZPos(2)],[s.coilRadii(1) -s.coilRadii(2)],'.k','MarkerSize',15)
@@ -44,4 +46,4 @@ xlabel('x (mm)')
 ylabel('y (mm)')
 title('Quadrupole Magnetic Field Lines')
 saveas(fig,[maindir 'field-lines-schematic.png'],'png')
-saveas(fig,[maindir 'field-lines-schematic.eps'],'epsc')
+saveas(fig,[maindir 'field-lines-schematic.eps'],'svg')
