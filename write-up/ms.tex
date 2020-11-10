@@ -1,4 +1,4 @@
-\documentclass[]{article}			% set type of document
+\documentclass[12pt]{article}		% set type of document and font size
 \usepackage[margin=1in]{geometry}	% set all margins to one inch
 \usepackage[utf8]{inputenc}			% basic formatting package
 \usepackage[english]{babel}			% specify language explicitly
@@ -7,15 +7,24 @@
 \bibliographystyle{unsrtnat}		% bibliography style
 \usepackage{graphicx}				% extra graphics capability
 
+\usepackage{hyperref}% set up hyperlinking
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=blue,      
+	urlcolor=blue,
+}
 
 % options for \maketitle
 \title{Insert title here}
 \author{Insert name here}
-%\date{}	% omit this to put today's date
+\date{}
 
 \begin{document}
 
 \maketitle
+
+\setlength{\parindent}{0in} % remove autoindentation
 
 \begin{abstract}
 	
