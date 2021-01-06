@@ -1,7 +1,9 @@
-addpath('/home/grant/git-hub/ultracold-plasmas/Magnetized Plasmas/Theoretical Quadrupole Fields/source')
+maindir = '/home/grant/git-hub/ultracold-plasmas/Magnetized Plasmas/Theoretical Quadrupole Fields'; 
+f = filesep;
+addpath([maindir f 'source'])
 
-zR = [-5 5];
-pR = [-5 5];
+zR = [-13 13];
+pR = [-13 13];
 numZPts = 100;
 numPPts = 100;
 amps = 80;
@@ -9,7 +11,7 @@ amps = 80;
 [B] = fieldForExpConfig(zR,pR,numZPts,numPPts,amps);
 
 dr = .005;
-x0 = zRange; % starting position along x-axis in mm
+x0 = zR; % starting position along x-axis in mm
 y0 = linspace(-5,5,14); % starting position along y-axis in mm
 
 iter = 0;
@@ -36,8 +38,8 @@ end
 xlabel('x (mm)')
 ylabel('y (mm)')
 title('Field Lines')
-xlim(zRange)
-ylim(pRange)
+xlim(zR)
+ylim(pR)
 
 ax = subplot(2,2,2);
 ax.PlotBoxAspectRatio = [1 1 1];
@@ -69,4 +71,3 @@ cb.Label.String = 'B_z (G)';
 title('x-component of B')
 
 saveas(fig,[maindir f 'fields-at-plasma.png'],'png')
-saveas(fig,[maindir f 'fields-at-plasma.eps'],'epsc')
