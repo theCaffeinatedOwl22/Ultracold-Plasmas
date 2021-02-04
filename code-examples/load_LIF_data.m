@@ -201,9 +201,15 @@ for i = 1:length(t)
         str1 = 'Optical Pumping Test Measurements';
     end
     str2 = ' - n_f_i_t from FGR fit to local spectra';
+<<<<<<< HEAD
 
     an.String = [str1 str2];
 
+=======
+
+    an.String = [str1 str2];
+
+>>>>>>> 0948276be486cde9a0903c33535949f7bf71ea49
     txt = text(0,0,'test');
     txt.Units = 'normalized';
     txt.Position = [-1.6633   -0.1020         0];
