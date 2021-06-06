@@ -8,12 +8,13 @@ row = 2;
 col = 2;
 num = 4;
 
+ax = cell(row,col);
 iter = 0;
 for i = 1:row
     for j = 1:col
         if iter > num - 1, break, end
         iter = iter + 1;
-        ax = subplot(row,col,iter);
+        ax{i,j} = subplot(row,col,iter);
         lgdstr = {};
 
         xdata = [];
@@ -24,10 +25,10 @@ for i = 1:row
         if j == 1, ylabel('ylabel'), end
         title('title')
 
-        ax.PlotBoxAspectRatio = [1 1 1];
-        ax.FontSize = 11;
-        ax.Position(1) = ax.Position(1) - 0;
-        ax.Position(2) = ax.Position(2) - 0;
+        ax{i,j}.PlotBoxAspectRatio = [1 1 1];
+        ax{i,j}.FontSize = 11;
+        ax{i,j}.Position(1) = ax{i,j}.Position(1) - 0;
+        ax{i,j}.Position(2) = ax{i,j}.Position(2) - 0;
 
     end
 end
@@ -39,3 +40,17 @@ an.VerticalAlignment = 'middle';
 an.LineStyle = 'none';
 an.FontSize = 12;
 an.String = '';
+
+climup = zeros(size(ax));
+for i = 1:row
+    for j = 1:col
+        climup(i,j) = ax{i,j}.CLim(2);
+    end
+end
+climup = max(climup,[],'all');
+
+for i = 1:row
+    for j = 1:col
+        ax{i,j}.CLim(2) = climup;
+    end
+end
