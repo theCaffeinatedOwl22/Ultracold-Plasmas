@@ -15,11 +15,13 @@ for i = 1:row
         if iter > num - 1, break, end
         iter = iter + 1;
         ax{i,j} = subplot(row,col,iter);
-        lgdstr = {};
+        lgdstr = cell(1,1);
+        l = getLineSpecs(length(lgdstr));
 
         xdata = [];
         ydata = [];
-        plot(xdata,ydata,'.-','LineWidth',1.5,'MarkerSize',15)
+        lp = l(1);
+        plot(xdata,ydata,lp.style,'LineWidth',2,'MarkerSize',4,'Color',lp.col,'MarkerFaceColor',lp.col,'MarkerEdgeColor',lp.col)
 
         ax{i,j}.PlotBoxAspectRatio = [1 1 1];
         ax{i,j}.FontSize = 11;
@@ -31,9 +33,11 @@ for i = 1:row
     end
 end
 
+% add legend
 lgd = legend(lgdstr);
 lgd.Position = [0.6394    0.8508    0.1552    0.0500];
 
+% shift subplot positions
 for i = 1:row
     for j = 1:col
         ax{i,j}.Position(1) = ax{i,j}.Position(1) - 0;
@@ -41,6 +45,7 @@ for i = 1:row
     end
 end
 
+% ensure color bar limits are the same
 climup = zeros(size(ax));
 for i = 1:row
     for j = 1:col
@@ -48,7 +53,6 @@ for i = 1:row
     end
 end
 climup = max(climup,[],'all');
-
 for i = 1:row
     for j = 1:col
         ax{i,j}.CLim(2) = climup;

@@ -3,12 +3,14 @@ fig.Position = [490   283   506   420];
 fig.Color = [1 1 1];
 
 ax = axes();
-lgdstr = {};
+hold on
+lgdstr = cell(1,1);
+l = getLineSpecs(length(lgdstr));
 
 xdata = [];
 ydata = [];
-ydatafilt = imgaussfilt(ydata,1);
-plot(xdata,ydata,'.-','LineWidth',1.5,'MarkerSize',15)
+lp = l(1);
+plot(xdata,ydata,lp.style,'LineWidth',2,'MarkerSize',4,'Color',lp.col,'MarkerFaceColor',lp.col,'MarkerEdgeColor',lp.col)
 
 ax.PlotBoxAspectRatio = [1 1 1];
 ax.FontSize = 11;
