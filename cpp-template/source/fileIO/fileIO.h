@@ -8,7 +8,6 @@
 #include <filesystem>   // imports directory interactivity - create directory, read directory contents, etc
 #include <fstream>      // imports std::ofstream for file writing
 #include <sstream>      // imports std::ifstream for file reading
-#include <typeinfo>     // for data type comparison using std::typeid
 
 // template functions
 #include <appendRowToCSV.h>

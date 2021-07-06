@@ -22,10 +22,10 @@ void appendRowToCSV(fs::path filePath, vector<T> data)
 
     // append 'data' to file
     string delim{","};
-    for (int i = 0; i < data.size() - 1; i++){
+    for (int i = 0; i < data.size() - 1; i++){ // for each element, except for the last one
         fileStream << data[i] << delim;
     }
-    fileStream << data.back() << endl;
+    fileStream << data.back() << endl; // use end line for the last element so that future writing automatically goes to new line
 }
 
 #endif
