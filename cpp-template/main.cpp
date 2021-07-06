@@ -15,6 +15,7 @@ int main(int argc, char *argv[])
         }
         cout << endl;
     }
+    vector<vector<double>> test = vecVecStr2Double(data);
 
     return 0;
 }
