@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.7.25)  25 JUL 2021 16:42
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.7.25)  25 JUL 2021 16:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -449,24 +449,30 @@ Package epstopdf Info: Source file: <schematic-with-levels.eps>
 converted-to.pdf schematic-with-levels.eps>
 (epstopdf)             \includegraphics on input line 68.
 Package epstopdf Info: Output file is already uptodate.
-<schematic-with-levels-eps-converted-to.pdf, id=39, 1022.82124pt x 465.74pt>
+<schematic-with-levels-eps-converted-to.pdf, id=43, 1022.82124pt x 465.74pt>
 File: schematic-with-levels-eps-converted-to.pdf Graphic file (type pdf)
 <use schematic-with-levels-eps-converted-to.pdf>
 Package pdftex.def Info: schematic-with-levels-eps-converted-to.pdf  used on in
 put line 68.
 (pdftex.def)             Requested size: 352.31625pt x 160.42464pt.
-(./ms.bbl [2 <./schematic-with-levels-eps-converted-to.pdf>]) [3] (./ms.aux)
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+(./ms.bbl [2]) [3 <./schematic-with-levels-eps-converted-to.pdf>] (./ms.aux)
 
 LaTeX Warning: There were undefined references.
 
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
 Package rerunfilecheck Info: File `ms.out' has not changed.
-(rerunfilecheck)             Checksum: 099EC5EF5A57C53A044F5C7FC6C03781;682.
+(rerunfilecheck)             Checksum: 28E7EA273AEF97319718EA411528103A;887.
  ) 
 Here is how much of TeX's memory you used:
- 11507 strings out of 478542
- 176320 string characters out of 5854402
- 507385 words of memory out of 5000000
- 29288 multiletter control sequences out of 15000+600000
+ 11509 strings out of 478542
+ 176340 string characters out of 5854402
+ 508385 words of memory out of 5000000
+ 29289 multiletter control sequences out of 15000+600000
  409500 words of font info for 48 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  60i,6n,66p,1120b,478s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -478,10 +484,10 @@ ype1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/publi
 c/amsfonts/cm/cmr12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmr17.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.p
 fb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on ms.pdf (3 pages, 424691 bytes).
+Output written on ms.pdf (3 pages, 427687 bytes).
 PDF statistics:
- 129 PDF objects out of 1000 (max. 8388607)
- 87 compressed objects within 1 object stream
- 12 named destinations out of 1000 (max. 500000)
- 38 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 135 PDF objects out of 1000 (max. 8388607)
+ 93 compressed objects within 1 object stream
+ 13 named destinations out of 1000 (max. 500000)
+ 46 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -44,7 +44,7 @@ The TexMaker compiler will need to be configured. There are two commands you'll 
 
 \section{Setting Up Document}
 \label{sec:setup}
-The default name for the main Tex document is $<$ms.tex$>$, as is the case with this template. When submitting manuscripts to journals, they will want the files named this way. As discussed in Sec. \ref{sec:install}, press F6 to create the .aux file.
+The default name for the main Tex document is $<$ms.tex$>$, as is the case with this template. When submitting manuscripts to journals, they will want the files named this way. As discussed in Sec. \ref{sec:install}, press F6 to create the .aux file, then you can compile the .bib into .bbl as needed. As you update ms.tex, using the default Quick Build to run PDFLaTeX and View PDF will be the quickest way to update the PDF.
 
 \section{Using BibTex for References}
 \label{sec:bib}
@@ -54,7 +54,7 @@ I like to use natbib as my reference compiler and the APS bibliography style (bo
 \section{Figures and Labels}
 \label{sec:figs}
 
-Here is how to reference a figure Fig. \ref{fig:exp-schem}, same as referring to any other label. Equations can be referred to as well. Here is the equation for the Coulomb coupling parameter (Eq. \ref{eq:gamma}):
+Here is how to create and reference a figure Fig. \ref{fig:exp-schem}, same as referring to any other label. Note that most journals want figure files submitted in .eps format. This is generally because they can open and edit .eps figure files after submission to adjust colors and the like without sending back to the authors. You can use .png and .jpeg, but prefer .eps to be used to it. Equations can be referred to as well. Here is the equation for the Coulomb coupling parameter (Eq. \ref{eq:gamma}):
 \begin{equation}
 \label{eq:gamma}
 \Gamma=\frac{e^2}{4\pi\epsilon_0 a_{ws} k_B T}
@@ -69,6 +69,12 @@ where $a_{ws}=(3/4\pi n)^{1/3}$ is an example of how to include in-line math.
 	\caption{(a) Experimental schematic for laser-induced fluorescence imaging LIF) and application of quadrupole magnetic fields using anti-Helmholtz coils (inset depicts field lines). The plasma is illuminated by a thin sheet of 422-nm light that propagates along the x axis and is linearly polarized along the y axis. The ion fluorescence is imaged onto an intensified CCD camera using a 1:1 optical relay along the z axis. (b) Sr levels coupled by LIF laser with (dashed) and without (solid) Zeeman shifts.}
 	
 \end{figure}
+
+\section{Overleaf - Online LaTeX Editor}
+
+\href{https://www.overleaf.com/}{Overleaf} is a free Online LaTeX editor that uses the TexLive distribution. The attraction to Overleaf is its ease of use (no installation required) and it makes collaborating easy. Unfortunately, the free Overleaf version only allows you to share with one collaborator and does not allow for version control via Git. You can link share, but that is much less secure as anyone who gets the link can edit the document. Another issue with Overleaf is that it compiles figures with low resolution. I often find small text in my figures looks blurry, but when compiled locally with TexMaker the figures look great. 
+
+Tom tends to like collaborating via Overleaf, so that is what I default to when I am writing a paper. I just make sure to download the source files every so often as a backup. For all other endeavors, I prefer using TexMaker locally so that I can have my files backed up either via Git or Google Drive. You will also find as projects get large that compiling locally will be faster. Whatever you choose to do, just make sure you are backing up your files somehow.
 
 \bibliography{UltracoldNeutralPlasmas.bib} 
 
