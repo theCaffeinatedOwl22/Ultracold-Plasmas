@@ -12,7 +12,6 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: UltracoldNeutralPlasmas.bib
-Warning--I didn't find a database entry for "glw2020"
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
 apsrev4-2.bst 2019-01-14 (MD) hand-edited version of apsrev4-1.bst
@@ -25,7 +24,7 @@ Control: year (1) truncated
 Control: production of eprint (0) enabled
 You've used 1 entry,
             6079 wiz_defined-function locations,
-            1642 strings with 15263 characters,
+            1641 strings with 15256 characters,
 and the built_in function-call counts, 1459 in all, are:
 = -- 82
 > -- 36
@@ -64,4 +63,3 @@ warning$ -- 0
 while$ -- 3
 width$ -- 0
 write$ -- 60
-(There was 1 warning)
