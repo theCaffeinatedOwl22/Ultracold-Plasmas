@@ -1,21 +1,14 @@
-#include <fileIO.h>
+#include "fileIO.h"
+#include "test.h"
+#include "test2.h"
 
-namespace fs = std::filesystem;
-using namespace std;
+#include <vector>
 
 int main(int argc, char *argv[])
 {
-    // test appendToCSV function
-    fs::path path{"/home/grant/git-hub/ultracold-plasmas/cpp-template/testFile.csv"};
-    vector<vector<string>> data = readCSV(path);
+    size_t elements = 2;
+    std::vector<double> test(elements);
+    appendRowToCSV<double>(test);
     
-    for(auto i: data){
-        for(auto j : i){
-            cout << j << ' ';
-        }
-        cout << endl;
-    }
-    vector<vector<double>> test = vecVecStr2Double(data);
-
     return 0;
 }

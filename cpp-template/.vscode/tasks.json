@@ -6,13 +6,16 @@
             "command": "/usr/bin/g++-8",
             "args": [
                 "-I",
-                "${fileDirname}/source/fileIO/",
-                
+                "${fileDirname}/source/fileIO",
+                "-I",
+                "${fileDirname}/source/test",
+
                 "-std=c++17", // choose c++ version
 
                 // list all .cpp files to compile
                 "${fileBasename}", // this is the file to compile (i.e., the one you are running)
                 "source/fileIO/*", // include source subfolder
+                "source/test/*", // include source subfolder
 
                 "-g",   // compile for debugging mode
 
