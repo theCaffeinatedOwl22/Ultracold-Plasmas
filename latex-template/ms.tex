@@ -36,10 +36,12 @@
 
 \section{Installing and Configuring LaTex} 
 \label{sec:install}
-In order to use LaTex you will need a LaTex editor and a Tex distribution. I  recommend using the TexMaker editor (\href{https://www.xm1math.net/texmaker/index.html}{link}) and TexLive (\href{https://www.tug.org/texlive/acquire-netinstall.html}{link}, click on $<$install-tl-windows.exe$>$). Once you have installed both, add the TexLive distribution to you system search path. The default distribution path is typically $<$C$:\backslash $texlive$\backslash 2021\backslash$bin$\backslash$win32$>$ on a Windows computer. 
+In order to use LaTex you will need a LaTex editor and a Tex distribution. I  recommend using  TexMaker (\href{https://www.xm1math.net/texmaker/index.html}{link}) or TexStudio (\href{https://www.texstudio.org/}{link}) and TexLive (\href{https://www.tug.org/texlive/acquire-netinstall.html}{link}, click on $<$install-tl-windows.exe$>$). Once you have installed an editor and distribution, add the TexLive distribution to you system search path. The default distribution path is typically $<$C$:\backslash $texlive$\backslash 2021\backslash$bin$\backslash$win32$>$ on a Windows computer. 
 
 The TexMaker compiler will need to be configured. There are two commands you'll need to use: $<$PDFLaTeX$>$, $<$BibTex$>$, and $<$View PDF$>$. For a new document, the PDF command must be run first to create a .aux file. All of your references will be contained within a .bib file, and the BibTex command must be run each time changes are made to this file. This command creates a $<$.bbl$>$ file that is linked to the .aux file, which allows your document to see the reference identifiers. Strangely, in order for the reference numbers to be linked properly, you need to run the PDFLaTeX command twice whenever the .bbl file is updated. This is a bit of a pain, but you can configure the Quick Build tool, accessed with F1 and configured at $<$options$\rightarrow$Configure Texmaker$>$
 , to run PDFLaTeX, BibTex, PDFLaTeX$\times2$, view PDF. This makes the compiling process a bit slower, so I tend to leave the Quick Build tool as default (i.e., run PDFLaTeX and View PDF). I just remember that I have to recompile the .bbl when I update the .bib because the default Quick Build tool is really fast.
+
+TexStudio won't need any extra compiling, so I recommend using that.
 
 
 \section{Setting Up Document}
