@@ -24,7 +24,7 @@ for i = 1:row
         plot(xdata,ydata,lp.style,'LineWidth',2,'MarkerSize',4,'Color',lp.col,'MarkerFaceColor',lp.col,'MarkerEdgeColor',lp.col)
 
         ax{i,j}.PlotBoxAspectRatio = [1 1 1];
-        ax{i,j}.FontSize = 11;
+        ax{i,j}.FontSize = 12;
 
         if i == row, xlabel('xlabel'), end
         if j == 1, ylabel('ylabel'), end
@@ -36,6 +36,10 @@ end
 % add legend
 lgd = legend(lgdstr);
 lgd.Position = [0.6394    0.8508    0.1552    0.0500];
+
+savename = [figdir f 'name.png'];
+saveas(fig,savename)
+close(fig)
 
 % shift subplot positions
 for i = 1:row

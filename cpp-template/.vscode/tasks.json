@@ -3,19 +3,13 @@
         {
             "type": "cppbuild",
             "label": "C/C++: g++ build active file",
-            "command": "/usr/bin/g++-8",
+            "command": "/usr/bin/g++-10",
             "args": [
-                "-I",
-                "${fileDirname}/source/fileIO",
-                "-I",
-                "${fileDirname}/source/test",
 
-                "-std=c++17", // choose c++ version
+                "-std=c++20", // choose c++ version
 
                 // list all .cpp files to compile
                 "${fileBasename}", // this is the file to compile (i.e., the one you are running)
-                "source/fileIO/*", // include source subfolder
-                "source/test/*", // include source subfolder
 
                 "-g",   // compile for debugging mode
 

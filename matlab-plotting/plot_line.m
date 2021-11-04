@@ -13,7 +13,7 @@ lp = l(1);
 plot(xdata,ydata,lp.style,'LineWidth',2,'MarkerSize',4,'Color',lp.col,'MarkerFaceColor',lp.col,'MarkerEdgeColor',lp.col)
 
 ax.PlotBoxAspectRatio = [1 1 1];
-ax.FontSize = 11;
+ax.FontSize = 12;
 
 xlabel('xlabel')
 ylabel('ylabel')
@@ -21,3 +21,7 @@ title('title')
 
 lgd = legend(lgdstr);
 lgd.Position = [0.6394    0.8508    0.1552    0.0500];
+
+savename = [figdir f 'name.png'];
+saveas(fig,savename)
+close(fig)
