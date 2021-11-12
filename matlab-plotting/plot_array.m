@@ -4,18 +4,12 @@ fig.Color = [1 1 1];
 
 ax = axes();
 
-xdata = [];
-ydata = [];
-zdata = [];
-imagesc(xdata,ydata,zdata)
-
-cb = colorbar;
-cb.FontSize = 11;
-cb.Label.String = 'Label';
-ax.YDir = 'Normal';
+surf = pcolor(xdata,ydata,zdata);
+surf.EdgeColor = 'interp';
+colorbar
 
 ax.PlotBoxAspectRatio = [1 1 1];
-ax.FontSize = 11;
+ax.FontSize = 12;
 
 xlabel('xlabel')
 ylabel('ylabel')
