@@ -1,14 +1,9 @@
-#include "fileIO.h"
-#include "test.h"
-#include "test2.h"
-
-#include <vector>
+#include <iostream>
+#include <filesystem>
 
 int main(int argc, char *argv[])
 {
-    size_t elements = 2;
-    std::vector<double> test(elements);
-    appendRowToCSV<double>(test);
+    std::filesystem::create_directories("test");
     
     return 0;
 }
