@@ -17,7 +17,7 @@
             "externalConsole": false,
             "MIMode": "gdb",
             "preLaunchTask": "${defaultBuildTask}",
-            "miDebuggerPath": "C:${pathSeparator}msys64${pathSeparator}mingw64${pathSeparator}bin${pathSeparator}gdb.exe",
+            "miDebuggerPath": "C:\\msys64\\mingw64\\bin\\gdb.exe",
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",
