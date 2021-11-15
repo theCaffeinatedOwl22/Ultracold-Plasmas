@@ -5,10 +5,7 @@ an.VerticalAlignment = 'middle';
 an.LineStyle = 'none';
 an.FontSize = 12;
 
-str1 = ['Phase' num2str(s.phase)];
-str2 = ['Te' num2str(s.Te)];
-str3 = ['Fields' num2str(s.mag)];
-str4 = ['t' num2str(s.t,'%.3g') 'us'];
-str5 = ['t' num2str(s.tau,'%.3g') '\tau'];
-str6 = ['tE' num2str(s.tE,'%.3g') 'ns'];
-an.String = [str1 dlm str2 dlm str3 dlm str4 dlm str5 dlm str6];
+dlm = ' - ';
+str1 = ['q1' num2str(q1,'%.3g')];
+str2 = ['q2' num2str(q2,'%.3g')];
+an.String = [str1 dlm str2];

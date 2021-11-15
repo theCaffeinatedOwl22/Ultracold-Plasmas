@@ -4,9 +4,12 @@ fig.Color = [1 1 1];
 
 ax = axes();
 
+xdata = [];
+ydata = [];
+zdata = [];
 surf = pcolor(xdata,ydata,zdata);
-surf.EdgeColor = 'interp';
-colorbar
+surf.EdgeColor = surf.FaceColor;
+cb = colorbar;
 
 ax.PlotBoxAspectRatio = [1 1 1];
 ax.FontSize = 12;

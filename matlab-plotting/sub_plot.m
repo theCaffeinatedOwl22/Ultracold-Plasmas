@@ -4,8 +4,8 @@ fig.Color = [1 1 1];
 
 colvar = {''};
 rowvar = {''};
-row = 2;
-col = 2;
+col = length(rowvar);
+row = length(colvar);
 num = row*col;
 
 ax = cell(row,col);
@@ -33,32 +33,9 @@ for i = 1:row
     end
 end
 
-% add legend
 lgd = legend(lgdstr);
 lgd.Position = [0.6394    0.8508    0.1552    0.0500];
 
 savename = [figdir f 'name.png'];
 saveas(fig,savename)
 close(fig)
-
-% shift subplot positions
-for i = 1:row
-    for j = 1:col
-        ax{i,j}.Position(1) = ax{i,j}.Position(1) - 0;
-        ax{i,j}.Position(2) = ax{i,j}.Position(2) - 0;
-    end
-end
-
-% ensure color bar limits are the same
-climup = zeros(size(ax));
-for i = 1:row
-    for j = 1:col
-        climup(i,j) = ax{i,j}.CLim(2);
-    end
-end
-climup = max(climup,[],'all');
-for i = 1:row
-    for j = 1:col
-        ax{i,j}.CLim(2) = climup;
-    end
-end
