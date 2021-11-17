@@ -16,7 +16,7 @@ for i = 1:row
         iter = iter + 1;
         ax{i,j} = subplot(row,col,iter);
         lgdstr = cell(1,1);
-        l = getLineSpecs(length(lgdstr));
+        lp = getLineSpecs(length(lgdstr));
 
         xdata = [];
         ydata = [];
