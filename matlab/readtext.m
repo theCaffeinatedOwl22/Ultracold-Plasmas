@@ -9,7 +9,7 @@ function [out] = readtext(directory,opt,dlm,com)
 
 % default values
 if nargin < 2, opt = 'string'; end
-if nargin < 3, dlm = {','}; end
+if nargin < 3, dlm = ','; end
 if nargin < 4, com = '%'; end
 
 % preallocate space for file contents
@@ -25,7 +25,7 @@ while ~feof(fid) % while end of file not yet reached
     line = fgetl(fid); 
     
     % only keep contents before comment delimiter if it is found within line
-    k = strfind(line,com);
+    k = strfindfirst(line,com);
     if ~isempty(k)
         if k(1) == 1
             line = '';

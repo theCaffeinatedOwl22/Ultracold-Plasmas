@@ -1,4 +1,4 @@
-function [s] = getLineSpecs(m)
+function [s] = getlinespecs(m)
 %%
 % m is the number of lines to be plotted on the same graph
 
