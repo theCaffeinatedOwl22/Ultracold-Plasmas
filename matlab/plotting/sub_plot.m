@@ -4,8 +4,8 @@ fig.Color = [1 1 1];
 
 colvar = {''};
 rowvar = {''};
-col = length(rowvar);
-row = length(colvar);
+col = length(colvar);
+row = length(rowvar);
 num = row*col;
 
 ax = cell(row,col);
@@ -15,6 +15,7 @@ for i = 1:row
         if iter > num - 1, break, end
         iter = iter + 1;
         ax{i,j} = subplot(row,col,iter);
+        hold on
         lgdstr = cell(1,1);
         l = getLineSpecs(length(lgdstr));
 
