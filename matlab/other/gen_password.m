@@ -49,17 +49,21 @@ end
 % randomize the order of the characters
 pause(rand());
 rng("shuffle")
-order = zeros(size(password));
-iter = 0;
-randomized = false;
-while ~randomized
-    if rand() < rand()
-        iter = iter + 1;
-        order(iter) = randi([1,10*numchars]);
+startswithletter = false;
+while ~startswithletter
+    order = zeros(size(password));
+    iter = 0;
+    randomized = false;
+    while ~randomized
+        if rand() < rand()
+            iter = iter + 1;
+            order(iter) = randi([1,10*numchars]);
+        end
+        if iter == length(order), randomized = true; end 
     end
-    if iter == length(order), randomized = true; end 
+    [~,sortind] = sort(order);
+    password = password(sortind);
+    if max(strcmp([lett_un lett_cap],password(1))) == 1, startswithletter = true; end
 end
-[~,sortind] = sort(order);
-password = password(sortind);
 
 end
