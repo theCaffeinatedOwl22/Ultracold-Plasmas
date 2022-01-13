@@ -4,7 +4,7 @@ function [password] = gen_password(numchars)
 % password (string): random password with length equal to numchars
 
 % default character length
-if nargin == 0, numchars = 25; end
+if nargin == 0, numchars = 20; end
 
 % seed random number generator
 rng("shuffle")
