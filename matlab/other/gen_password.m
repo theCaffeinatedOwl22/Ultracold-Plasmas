@@ -1,4 +1,4 @@
-function [password] = gen_password(numchars)
+function [password] = gen_password(numchars,throwaway)
 % numchars (integer): length of password to generate
 % throwaway (integer): number of values to call from randi before getting password
 % password (string): random password with length equal to numchars
@@ -9,15 +9,36 @@ rng("shuffle")
 % default character length
 if nargin == 0, numchars = 15; end
 
-% define <chars> that password can consist of
+% throw away user specified amount of numbers from sequence
+if nargin < 2
+    throwaway = input("Throwaway: "); 
+    throwaway = throwaway*rand();
+end
+for i = 1:length(throwaway)
+    rand();
+end
+threshold = rand();
+
+% define <chars> that password can consist of and randomize them
 lett_un = {'a' 'b' 'c' 'd' 'e' 'f' 'g' 'h' 'i' 'j' 'k' 'l' 'm' 'n' 'o' 'p' 'q' 'r' 's' 't' 'u' 'v' 'w' 'x' 'y' 'z'};
 lett_cap = {'A' 'B' 'C' 'D' 'E' 'F' 'G' 'H' 'I' 'J' 'K' 'L' 'M' 'N' 'O' 'P' 'Q' 'R' 'S' 'T' 'U' 'V' 'W' 'X' 'Y' 'Z'};
 symbols = {'!' '@' '#' '$' '%' '&' '*'};
 numbers = {'0','1','2','3','4','5','6','7','8','9'};
 chars = [lett_un lett_cap symbols numbers];
+chars = random_order(chars);
+
+% define a larger character pool
+ind = randi(length(chars),[1,100*length(chars)]);
+char_pool = chars(ind);
+char_pool = random_order(char_pool);
 
 % generate passwords until a strong password is obtained
 % a strong password is a password with one of each character type within <chars>
+pause(rand());
+rng("shuffle")
+for i = 1:length(throwaway)
+    rand();
+end
 strong = false;
 while ~strong
     % generate password
@@ -25,10 +46,10 @@ while ~strong
     generated = false;
     iter = 0;
     while ~generated
-        val = randi([1,length(chars)]);
-        if rand() > rand()
+        val = randi(length(char_pool));
+        if rand() < threshold
             iter = iter + 1;
-            password(iter) = chars{val};
+            password(iter) = char_pool{val};
         end
         if length(password) == numchars, generated = true; end
     end
@@ -46,23 +67,10 @@ while ~strong
     strong = lett_un_ind && lett_cap_ind && symbols_ind && numbers_ind;
 end
 
-% randomize the order of the characters
-pause(rand());
-rng("shuffle")
+% randomize order of characters but make sure it starts with a letter
 startswithletter = false;
 while ~startswithletter
-    order = zeros(size(password));
-    iter = 0;
-    randomized = false;
-    while ~randomized
-        if rand() < rand()
-            iter = iter + 1;
-            order(iter) = randi([1,10*numchars]);
-        end
-        if iter == length(order), randomized = true; end 
-    end
-    [~,sortind] = sort(order);
-    password = password(sortind);
+    password = random_order(password);
     if max(strcmp([lett_un lett_cap],password(1))) == 1, startswithletter = true; end
 end
 
