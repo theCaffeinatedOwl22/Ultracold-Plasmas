@@ -1,44 +1,35 @@
-function [password] = gen_password(numchars,throwaway)
+function [password] = gen_password(numchars)
 % numchars (integer): length of password to generate
 % throwaway (integer): number of values to call from randi before getting password
 % password (string): random password with length equal to numchars
 
-% seed generator with current time
-rng("shuffle")
-
 % default character length
-if nargin == 0, numchars = 15; end
+if nargin == 0, numchars = 25; end
 
-% throw away user specified amount of numbers from sequence
-if nargin < 2
-    throwaway = input("Throwaway: "); 
-    throwaway = throwaway*rand();
-end
-for i = 1:length(throwaway)
-    rand();
-end
+% seed random number generator
+rng("shuffle")
+[seed] = toss();
 threshold = rand();
 
 % define <chars> that password can consist of and randomize them
 lett_un = {'a' 'b' 'c' 'd' 'e' 'f' 'g' 'h' 'i' 'j' 'k' 'l' 'm' 'n' 'o' 'p' 'q' 'r' 's' 't' 'u' 'v' 'w' 'x' 'y' 'z'};
 lett_cap = {'A' 'B' 'C' 'D' 'E' 'F' 'G' 'H' 'I' 'J' 'K' 'L' 'M' 'N' 'O' 'P' 'Q' 'R' 'S' 'T' 'U' 'V' 'W' 'X' 'Y' 'Z'};
-symbols = {'!' '@' '#' '$' '%' '&' '*'};
+symbols = {'!' '@' '#' '$' '%' '&' '*' '.' ',' ';' ':' '/' '\'};
 numbers = {'0','1','2','3','4','5','6','7','8','9'};
 chars = [lett_un lett_cap symbols numbers];
 chars = random_order(chars);
 
 % define a larger character pool
+rng(seed)
+[seed] = toss(seed);
 ind = randi(length(chars),[1,100*length(chars)]);
 char_pool = chars(ind);
 char_pool = random_order(char_pool);
 
 % generate passwords until a strong password is obtained
 % a strong password is a password with one of each character type within <chars>
-pause(rand());
 rng("shuffle")
-for i = 1:length(throwaway)
-    rand();
-end
+toss(seed);
 strong = false;
 while ~strong
     % generate password
