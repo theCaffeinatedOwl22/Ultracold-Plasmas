@@ -17,3 +17,8 @@ ax.FontSize = 12;
 xlabel('xlabel')
 ylabel('ylabel')
 title('title')
+
+savename = [figdir f 'name'];
+saveas(fig,[savename '.png'])
+exportgraphics(fig,[savename '.eps'],'ContentType','Vector')
+close(fig)
