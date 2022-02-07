@@ -24,6 +24,7 @@ title('title',FontWeight='normal',FontSize=fontsize)
 lgd = legend(lgdstr);
 lgd.Position = [0.6394    0.8508    0.1552    0.0500];
 
-figname = 'figname';
-export_fig([figdir f figname],'-png')
-export_fig([figdir f figname],'-eps')
+savename = [figdir f 'name'];
+saveas(fig,[savename '.png'])
+exportgraphics(fig,[savename '.eps'],'ContentType','Vector')
+close(fig)

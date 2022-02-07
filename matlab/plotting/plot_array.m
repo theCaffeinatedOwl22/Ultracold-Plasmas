@@ -26,8 +26,10 @@ ax.YDir = 'normal';
 
 xlabel('xlabel')
 ylabel('ylabel')
+<<<<<<< HEAD
 title('title',FontWeight='normal',FontSize=fontsize)
 
-figname = 'figname';
-export_fig([figdir f figname],'-png')
-export_fig([figdir f figname],'-eps')
+savename = [figdir f 'name'];
+saveas(fig,[savename '.png'])
+exportgraphics(fig,[savename '.eps'],'ContentType','Vector')
+close(fig)
