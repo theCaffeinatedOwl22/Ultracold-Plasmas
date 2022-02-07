@@ -1,19 +1,33 @@
 fig = figure;
-fig.Position = [490   283   540   420];
+fig.Units = 'normalized';
+fig.Position = [0.2902    0.3049    0.3762    0.3139];
 fig.Color = [1 1 1];
+fontsize = 11;
 
 ax = axes();
 
 xdata = [];
 ydata = [];
 zdata = [];
-surf = pcolor(xdata,ydata,zdata);
-surf.EdgeColor = surf.FaceColor;
+imagesc(xdata,ydata,zdata);
+
 cb = colorbar;
+cb.FontSize = fontsize;
+cb.Label.FontSize = fontsize;
+cb.Label.Units = 'normalized';
+cb.Label.String = 'label';
+cb.Label.VerticalAlignment = 'middle';
+cb.Label.Rotation = -90;
+cb.Label.Position = [3.4102    0.5000         0];
 
 ax.PlotBoxAspectRatio = [1 1 1];
-ax.FontSize = 12;
+ax.FontSize = fontsize;
+ax.YDir = 'normal';
 
 xlabel('xlabel')
 ylabel('ylabel')
-title('title')
+title('title',FontWeight='normal',FontSize=fontsize)
+
+figname = 'figname';
+export_fig([figdir f figname],'-png')
+export_fig([figdir f figname],'-eps')
