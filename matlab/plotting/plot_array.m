@@ -26,7 +26,6 @@ ax.YDir = 'normal';
 
 xlabel('xlabel')
 ylabel('ylabel')
-<<<<<<< HEAD
 title('title',FontWeight='normal',FontSize=fontsize)
 
 savename = [figdir f 'name'];
