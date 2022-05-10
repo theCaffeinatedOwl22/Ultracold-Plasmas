@@ -8,11 +8,19 @@
             "type": "shell",
             "command": "g++",
             "args": [
+                "-I",
+                "source",
+
                 "-std=c++20",
-                "-o",
-                "main.exe",
+                "-fopenmp",
+
                 "-g",
                 "main.cpp",
+                "source${pathSeparator}*.cpp",
+
+                "-o",
+                "main.exe",
+
                 "-lm",
                 "-lstdc++fs"
             ],
