@@ -18,7 +18,7 @@ void Settings::load_settings(const fs::path& settings_path)
     m_names.resize(mat_in.size());  // name for each row
     m_units.resize(mat_in.size());  // unit for each row
     for (int i = 0; i < mat_in.size(); i++){
-        if (mat_in[i].size() < 3) error("Error in load_settings: each row must contain a variable name, unit, and one or more comma-separated values.");
+        assert(mat_in[i].size() >= 3 && "Each row must contain a variable name, unit, and one or more comma-separated values.");
         m_names[i] = mat_in[i][0];
         m_units[i] = mat_in[i][1];
         for (int j = 2; j < mat_in[i].size(); j++){
@@ -46,7 +46,7 @@ void Settings::check_units(void) const{
     // check that specified units are possible
     for (auto& i : m_units){
         bool unit_check = std::find(possible_units.begin(),possible_units.end(),i) != possible_units.end();
-        if (!unit_check) error("Error in check_units: units for each variable must either be <cgs> or another variable name.");
+        assert(unit_check && "Units for each variable must either be <cgs> or another variable name.");
     } 
 
     // for varialbes with non-cgs units, check that their dependencies are in cgs
@@ -68,7 +68,7 @@ void Settings::check_units(void) const{
 // choose which set of unique conditions to use
 void Settings::choose_array(const int& array)
 {
-    if (array<0 || array>=m_mat.size()) error("Error in choose_array: requested array is out of bounds.");
+    assert(array>=0 && array<m_mat.size() && "<array> is out of bounds for <m_mat>");
     m_vals = m_mat[array];
     m_array_chosen = true;
 }
@@ -86,22 +86,23 @@ std::vector<int> Settings::get_valid_arrays() const
 // return numeric variable with cgs units
 double Settings::getvar(const std::string& name) const
 {
-    if (!m_array_chosen) error("Error in Settings::getvar: user must use <choose_array> funciton to select unique set of conditions.");
+    assert(m_array_chosen && "Set <m_array> using <choose_array> before calling variables with <getvar>.");
 
     // ensure given name corresponds to variable name and that variable is not type "opt"
     auto it = std::find(m_names.begin(),m_names.end(),name);
-    if (it == m_names.end()) error("Error in Settings::getvar: requested variable name was not found in .settings file.");
+    if (it == m_names.end()) error("Error in Settings::getvar: requested variable <" + name + "> name was not found in .settings file.");
     size_t loc = std::distance(m_names.begin(),it);
-    if (m_units[loc]=="opt") error("Error in Settings::getvar: requested variable is type opt, so use <getopt> function instead.");
 
     // get value of variable corresponding to <name>
+    if (m_units[loc]=="opt") error("Error in Settings::getvar: requested variable <"+m_names[loc]+"> is type opt, so use <getopt> function instead.");
     double val = stod(m_vals[loc]);
 
     // if not in cgs units, convert <val> to cgs units
     if (m_units[loc]!="cgs"){ // if variable units are not "cgs" (i.e., expressed in terms of another variable)
         auto it = std::find(m_names.begin(),m_names.end(),m_units[loc]);
-        if(it!=m_names.end());
-        size_t loc2 = it - m_names.begin();
+        if (it==m_names.end()) error("Error in Settings::getvar: <"+m_units[loc]+"> does not match a variable name.");
+        size_t loc2 = std::distance(m_names.begin(),it);
+        if (m_units[loc2]!="cgs") error("A variable was expressed in terms of <"+m_names[loc2]+">, but its units are not <cgs>.");
         val *= stod(m_vals[loc2]);
     }
 
