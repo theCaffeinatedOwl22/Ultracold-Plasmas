@@ -9,6 +9,7 @@
 #include <string> // std::string, std::getline
 #include <math.h> // sqrt, pow, etc - basic math functions
 #include <algorithm> // std::remove, std::find, std::distance
+#include <cassert> // assert
 
 namespace fs = std::filesystem;
 
@@ -20,6 +21,7 @@ std::vector<double> bin_vector(const std::vector<double>& vec_in,const std::vect
 double euclidean_norm(const std::vector<double>& vec_in);
 std::vector<std::vector<std::string>> readCSV(fs::path filePath);
 void error(const std::string& err_msg);
+std::string getCommandLineArg(int argc, char* argv[], std::string short_flag, std::string long_flag);
 
 //*** FUNCTION TEMPLATES ***//
 

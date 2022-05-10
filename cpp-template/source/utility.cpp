@@ -110,3 +110,19 @@ void error(const std::string& err_msg)
     std::cerr << err_msg << std::endl;
     std::abort();
 }
+
+std::string getCommandLineArg(int argc, char* argv[], std::string short_flag, std::string long_flag)
+{
+  std::vector<std::string> arguments(argv+1, argv+argc);
+  std::string result;
+  int num_args = argc - 1;
+  for(int i=0; i<num_args; i++){
+    assert(arguments[i][0] == '-' && i+1<num_args && "Error 1: arguments must be given as flag followed by non-flag");
+    if(arguments[i] == short_flag || arguments[i] == long_flag){
+      assert(result.empty() && "Error 2: command line flags cannot be used more than once");
+      result = arguments[i+1];
+    }
+    i++;
+  }
+  return result;
+}

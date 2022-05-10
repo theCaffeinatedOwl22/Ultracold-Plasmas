@@ -10,7 +10,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}${pathSeparator}main.exe",
-            "args": [],
+            "args": ["-f","test"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
