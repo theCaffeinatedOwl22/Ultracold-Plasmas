@@ -104,6 +104,13 @@ std::string Settings::task_array_range() const
     return "Valid task array: [0 "+num2str(array_size()-1)+"]";
 }
 
+std::vector<int> Settings::task_array() const
+{
+    std::vector<int> array(m_unique.size());
+    for (int i=0; i<array.size(); i++) array[i] = i;
+    return array;
+}
+
 // return size of unique array
 int Settings::array_size() const
 {
@@ -151,7 +158,7 @@ std::string Settings::getopt(const std::string& name) const
     bool found = it != m_names.end();
     assert(found && "Requested name does not correspond to a variable name");
     size_t loc = std::distance(m_names.begin(),it);
-    bool is_opt = m_names[loc] == "opt";
+    bool is_opt = m_units[loc] == "opt";
     assert(is_opt && "Requested variable is not of type <opt>");
     return m_array[loc];
 }

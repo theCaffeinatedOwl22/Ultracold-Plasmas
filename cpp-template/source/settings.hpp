@@ -26,6 +26,7 @@ public:
     
     // *** Getters
     std::string task_array_range() const;
+    std::vector<int> task_array() const;
     int array_size() const;
     int runs() const;
     double getvar(const std::string& name) const; 
