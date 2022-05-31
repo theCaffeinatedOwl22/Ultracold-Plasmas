@@ -34,7 +34,14 @@ public:
     
     // *** File I/O
     void write_array_params(const fs::path& path) const;
-
+    void create_directories(const fs::path& path);
+    template<typename T> static std::string num2str(T num,int prec = 9)
+    {
+            std::stringstream ss;
+            ss.precision(prec);
+            ss << num;
+            return ss.str();
+    };
 private:
     const std::string m_unit_str;
 
@@ -50,8 +57,7 @@ private:
 
     std::vector<std::vector<std::string>> unique_comb(const std::vector<std::vector<std::string>>& mat_in,const std::vector<std::string>& vec_2) const;
     std::vector<std::vector<std::string>> unique_comb(const std::vector<std::string>& vec_in,const std::vector<std::string>& vec_2) const;
-    std::vector<std::vector<std::string>> read_file(fs::path filePath);
-    template <typename T> std::string num2str(T num,int prec = 6) const;
+    std::vector<std::vector<std::string>> read_file(fs::path filePath);    
 };
 
 #endif

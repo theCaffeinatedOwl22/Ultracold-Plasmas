@@ -16,15 +16,7 @@ int main(int argc, char *argv[])
 
     Settings pms(settings_path);
     std::cout << pms.task_array_range() << std::endl;
-
-    for (int i=0; i<pms.array_size(); i++){
-        pms.choose_array(i);
-        int set_num = i/pms.runs();
-        fs::path set_path = "set_"+num2str(set_num);
-        fs::path run_path = "run_"+num2str(pms.getvar("runs"));
-        fs::create_directories(save_path/set_path/run_path);
-        pms.write_array_params(save_path/set_path/run_path);
-    } 
+    pms.create_directories(save_path);
 
     return 0;
 }

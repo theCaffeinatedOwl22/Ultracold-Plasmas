@@ -34,13 +34,4 @@ template <typename T> std::vector<T> linspace(double min, double max, int num_pt
     return vec_out;
 }
 
-// convert a double or integer to string with specified precision
-template <typename T> std::string num2str(T num,int prec = 6)
-{
-    std::stringstream ss;
-    ss.precision(prec);
-    ss << num;
-    return ss.str();
-}
-
 #endif

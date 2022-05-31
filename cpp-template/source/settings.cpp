@@ -175,6 +175,28 @@ void Settings::write_array_params(const fs::path& path) const
     }
 }
 
+// create directories with unique .settings files
+void Settings::create_directories(const fs::path& path)
+{
+    for (int i : task_array()){
+        choose_array(i);
+        int set_num;
+        fs::path set_path, run_path, full_path;
+        if (m_runs_found)
+        {
+            set_num = i/runs();
+            set_path = "set_"+Settings::num2str(set_num);
+            run_path = "run_"+Settings::num2str(getvar("runs"));
+            full_path = path/set_path/run_path;
+        }
+        else{
+            set_path = "set_"+Settings::num2str(i);
+            full_path = path/set_path;
+        }
+        write_array_params(full_path);
+    } 
+}
+
 // get unique combinations of each row of mat_in and each element of vec_2
 std::vector<std::vector<std::string>> Settings::unique_comb(const std::vector<std::vector<std::string>>& mat_in,const std::vector<std::string>& vec_2) const
 {
@@ -266,12 +288,4 @@ std::vector<std::vector<std::string>> Settings::read_file(fs::path filePath)
     data.shrink_to_fit();
 
     return data;
-}
-
-template <typename T> std::string Settings::num2str(T num,int prec) const
-{
-    std::stringstream ss;
-    ss.precision(prec);
-    ss << num;
-    return ss.str();
 }
