@@ -33,8 +33,8 @@ public:
     std::string getopt(const std::string& name) const;
     
     // *** File I/O
-    void write_array_params(const fs::path& path) const;
-    void create_directories(const fs::path& path);
+    void write_array_params(const fs::path& path, bool overwrite = false) const;
+    void create_directories(const fs::path& path, bool overwrite = false);
     template<typename T> static std::string num2str(T num,int prec = 9)
     {
             std::stringstream ss;

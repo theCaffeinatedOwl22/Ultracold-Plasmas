@@ -164,10 +164,11 @@ std::string Settings::getopt(const std::string& name) const
 }
 
 // write plasma settings for specified m_vals value (i.e., the corresponding row of m_unique)
-void Settings::write_array_params(const fs::path& path) const
+void Settings::write_array_params(const fs::path& path,bool overwrite) const
 {
     if (!fs::exists(path)) fs::create_directories(path);
     fs::path file_path{path/"plasma.settings"};
+    if (!overwrite) assert(!fs::exists(file_path) && "The file target already exists and the user specified not to overwrite.");
     std::ofstream out_file(file_path);
     for (int i=0; i<m_names.size(); i++){
         out_file << m_names[i] << " = " << m_units[i] << " = " << m_array[i];
@@ -176,7 +177,7 @@ void Settings::write_array_params(const fs::path& path) const
 }
 
 // create directories with unique .settings files
-void Settings::create_directories(const fs::path& path)
+void Settings::create_directories(const fs::path& path, bool overwrite)
 {
     for (int i : task_array()){
         choose_array(i);
@@ -193,7 +194,7 @@ void Settings::create_directories(const fs::path& path)
             set_path = "set_"+Settings::num2str(i);
             full_path = path/set_path;
         }
-        write_array_params(full_path);
+        write_array_params(full_path,overwrite);
     } 
 }
 
