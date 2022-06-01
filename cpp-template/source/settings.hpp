@@ -45,6 +45,7 @@ public:
             ss << num;
             return ss.str();
     };
+    
 private:
     const std::string m_unit_str;
 

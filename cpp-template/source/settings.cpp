@@ -12,6 +12,7 @@ Settings::Settings(fs::path settings_path,std::string unit):
 // load .settings file that defines plasma characteristics for MHD simulation
 void Settings::load_settings(const fs::path& settings_path)
 {
+    // read in contents from file
     // mat_in[i] contains [name unit val1 val2 ... valx]
     bool is_settings = settings_path.extension().string()==".settings";
     assert(is_settings && "Path must point to .settings file.");
@@ -20,7 +21,7 @@ void Settings::load_settings(const fs::path& settings_path)
     // extract information from input matrix
     m_names.reserve(mat_in.size());  // name for each row
     m_units.reserve(mat_in.size());  // unit for each row
-    m_vals.reserve(mat_in.size());   // values associated with each quantity   
+    m_vals.reserve(mat_in.size());   // values associated with each name-unit pair
     for (auto row : mat_in){
         m_names.push_back(row[0]);
         m_units.push_back(row[1]);
@@ -57,8 +58,8 @@ void Settings::check_units(void) const{
         assert(unit_valid && "Units for each variable must either be <m_unit_str> or another variable name.");
     } 
 
-    // for varialbes with non-m_unit_str units, check that their dependencies are in m_unit_str
-    for (auto unit : m_units){
+    // for variables with non-m_unit_str units, check that their dependencies are in units of m_unit_str
+    for (auto& unit : m_units){
         if (unit!=m_unit_str && unit!="opt"){
             auto it = std::find(m_names.begin(),m_names.end(),unit);
             assert(it!=m_names.end());
