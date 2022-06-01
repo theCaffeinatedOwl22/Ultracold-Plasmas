@@ -112,7 +112,7 @@ std::vector<int> Settings::task_array() const
     return array;
 }
 
-// return size of unique array
+// return size of m_unique
 int Settings::array_size() const
 {
     return m_unique.size();

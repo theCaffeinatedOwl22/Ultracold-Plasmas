@@ -22,20 +22,22 @@ public:
     void load_settings(const fs::path& settings_path);
     void check_units() const;
     void process_runs();
-    void choose_array(const int& array);
     
-    // *** Getters
+    // *** Usage
+    void choose_array(const int& array);
+    void write_array_params(const fs::path& path, bool overwrite = false) const;
+    void write_all(const fs::path& path, bool overwrite = false);
+    
+    // *** Getters    
     std::string task_array_range() const;
     std::vector<int> task_array() const;
     int array_size() const;
     int runs() const;
     double getvar(const std::string& name) const; 
     std::string getopt(const std::string& name) const;
-    
-    // *** File I/O
     fs::path output_path() const;
-    void write_array_params(const fs::path& path, bool overwrite = false) const;
-    void write_all(const fs::path& path, bool overwrite = false);
+    
+    // *** Templates
     template<typename T> static std::string num2str(T num,int prec = 9)
     {
             std::stringstream ss;
