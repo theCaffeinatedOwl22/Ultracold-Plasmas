@@ -33,8 +33,9 @@ public:
     std::string getopt(const std::string& name) const;
     
     // *** File I/O
+    fs::path output_path() const;
     void write_array_params(const fs::path& path, bool overwrite = false) const;
-    void create_directories(const fs::path& path, bool overwrite = false);
+    void write_all(const fs::path& path, bool overwrite = false);
     template<typename T> static std::string num2str(T num,int prec = 9)
     {
             std::stringstream ss;
@@ -53,7 +54,8 @@ private:
     int m_runs; // number of runs for each unique set of conditions
 
     bool m_array_chosen{false}; // must be set to true by <choose_array> before calling <getvar> or <getopt>
-    std::vector<std::string> m_array; // m_array[i] is the value correponding to m_names[i] and m_units[i]
+    int m_array;
+    std::vector<std::string> m_array_vals; // m_array_vals[i] holds the values for the chosen array correponding to m_names[i] and m_units[i]
 
     std::vector<std::vector<std::string>> unique_comb(const std::vector<std::vector<std::string>>& mat_in,const std::vector<std::string>& vec_2) const;
     std::vector<std::vector<std::string>> unique_comb(const std::vector<std::string>& vec_in,const std::vector<std::string>& vec_2) const;

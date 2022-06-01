@@ -94,7 +94,8 @@ void Settings::process_runs()
 void Settings::choose_array(const int& ind)
 {
     assert(ind>=0 && ind<m_unique.size() && "<array> is out of bounds for <m_unique>");
-    m_array = m_unique[ind];
+    m_array = ind;
+    m_array_vals = m_unique[m_array];
     m_array_chosen = true;
 }
 
@@ -137,14 +138,14 @@ double Settings::getvar(const std::string& name) const
     assert(!is_opt && "Requested variable is of type <opt>, use <getopt> instead.");
     
     // obtain value associated with <name> and convert units if necessary
-    double val = stod(m_array[loc]);
+    double val = stod(m_array_vals[loc]);
     if (m_units[loc]!=m_unit_str){ // if variable units are not "m_unit_str" (i.e., expressed in terms of another variable)
         auto it = std::find(m_names.begin(),m_names.end(),m_units[loc]);
         assert(it!=m_names.end());
         size_t loc2 = std::distance(m_names.begin(),it);
         bool is_numeric = m_units[loc2]==m_unit_str;
         assert(is_numeric && "Variable units can only be expressed in terms of another variable that is expressed in <m_unit_str> units.");
-        val *= stod(m_array[loc2]);
+        val *= stod(m_array_vals[loc2]);
     }
 
     return val;
@@ -160,41 +161,45 @@ std::string Settings::getopt(const std::string& name) const
     size_t loc = std::distance(m_names.begin(),it);
     bool is_opt = m_units[loc] == "opt";
     assert(is_opt && "Requested variable is not of type <opt>");
-    return m_array[loc];
+    return m_array_vals[loc];
+}
+
+// returns the relative path where the .settings file is written to
+fs::path Settings::output_path() const
+{
+    assert(m_array_chosen && "Must call <choose_array> before calling <output_path>");
+    if (m_runs_found){
+        int set_num = m_array/runs();
+        fs::path set_path = "set_"+Settings::num2str(set_num);
+        fs::path run_path = "run_"+Settings::num2str(getvar("runs"));
+        return set_path/run_path;
+    }
+    else{
+        return "set_"+Settings::num2str(m_array+1);
+    }
 }
 
 // write plasma settings for specified m_vals value (i.e., the corresponding row of m_unique)
 void Settings::write_array_params(const fs::path& path,bool overwrite) const
 {
-    if (!fs::exists(path)) fs::create_directories(path);
-    fs::path file_path{path/"plasma.settings"};
+    assert(m_array_chosen && "Must call <choose_array> before calling <write_array_params>.");
+    fs::path full_path = path/output_path();
+    if (!fs::exists(full_path)) fs::create_directories(full_path);
+    fs::path file_path = full_path/"plasma.settings";
     if (!overwrite) assert(!fs::exists(file_path) && "The file target already exists and the user specified not to overwrite.");
     std::ofstream out_file(file_path);
     for (int i=0; i<m_names.size(); i++){
-        out_file << m_names[i] << " = " << m_units[i] << " = " << m_array[i];
+        out_file << m_names[i] << " = " << m_units[i] << " = " << m_array_vals[i];
         if (i != (m_names.size()-1)) out_file << std::endl;
     }
 }
 
 // create directories with unique .settings files
-void Settings::create_directories(const fs::path& path, bool overwrite)
+void Settings::write_all(const fs::path& path, bool overwrite)
 {
     for (int i : task_array()){
-        choose_array(i);
-        int set_num;
-        fs::path set_path, run_path, full_path;
-        if (m_runs_found)
-        {
-            set_num = i/runs();
-            set_path = "set_"+Settings::num2str(set_num);
-            run_path = "run_"+Settings::num2str(getvar("runs"));
-            full_path = path/set_path/run_path;
-        }
-        else{
-            set_path = "set_"+Settings::num2str(i);
-            full_path = path/set_path;
-        }
-        write_array_params(full_path,overwrite);
+        choose_array(i);        
+        write_array_params(path,overwrite);
     } 
 }
 

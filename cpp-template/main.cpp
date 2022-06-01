@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
 
     Settings pms(settings_path);
     std::cout << pms.task_array_range() << std::endl;
-    pms.create_directories(save_path);
+    pms.write_all(save_path);
 
     return 0;
 }
