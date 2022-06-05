@@ -17,11 +17,6 @@ class Settings
 public: 
     // *** Constructor
     Settings(fs::path settings_path,std::string unit = "cgs");
-
-    // *** Initialization
-    void load_settings(const fs::path& settings_path);
-    void check_units() const;
-    void process_runs();
     
     // *** Usage
     void choose_array(const int& array);
@@ -45,24 +40,29 @@ public:
             ss << num;
             return ss.str();
     };
-    
+
 private:
-    const std::string m_unit_str;
-
-    std::vector<std::string> m_names, m_units;
-    std::vector<std::vector<std::string>> m_vals;
-    std::vector<std::vector<std::string>> m_unique;
-
-    bool m_runs_found; // indicates whether <runs> was given in the .settings 
-    int m_runs; // number of runs for each unique set of conditions
-
-    bool m_array_chosen{false}; // must be set to true by <choose_array> before calling <getvar> or <getopt>
-    int m_array;
-    std::vector<std::string> m_array_vals; // m_array_vals[i] holds the values for the chosen array correponding to m_names[i] and m_units[i]
-
+    // *** Initialization
+    
+    void load_settings(const fs::path& settings_path);
+    void check_units() const;
+    void process_runs();
     std::vector<std::vector<std::string>> unique_comb(const std::vector<std::vector<std::string>>& mat_in,const std::vector<std::string>& vec_2) const;
     std::vector<std::vector<std::string>> unique_comb(const std::vector<std::string>& vec_in,const std::vector<std::string>& vec_2) const;
-    std::vector<std::vector<std::string>> read_file(fs::path filePath);    
+    std::vector<std::vector<std::string>> read_file(fs::path filePath);  
+
+    // *** Members
+
+    const std::string m_unit_str{};
+    std::vector<std::string> m_names{}, m_units{};
+    std::vector<std::vector<std::string>> m_vals{};
+    std::vector<std::vector<std::string>> m_unique{};
+    bool m_runs_found{}; // indicates whether <runs> was given in the .settings 
+    int m_runs{}; // number of runs for each unique set of conditions
+    bool m_array_chosen{false}; // must be set to true by <choose_array> before calling <getvar> or <getopt>
+    int m_array{};
+    std::vector<std::string> m_array_vals{}; // m_array_vals[i] holds the values for the chosen array correponding to m_names[i] and m_units[i]
+      
 };
 
 #endif
