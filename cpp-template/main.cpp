@@ -3,6 +3,7 @@
 #include "matrix.hpp"
 #include "class_notes.hpp"
 #include "Overloading.hpp"
+#include "Timer.hpp"
 
 #include <iostream>
 #include <filesystem>

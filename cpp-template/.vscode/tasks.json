@@ -8,17 +8,20 @@
             "type": "shell",
             "command": "g++",
             "args": [
-                // includes
+                // include paths
                 "-I", "source",
-                // flags
+
+                // compiler flags
                 "-std=c++20", "-fopenmp", "-g",
-                // source
+                
+                // source files
                 "main.cpp",
-                "source${pathSeparator}*.cpp",
-                // executable
-                "-o",
-                "main.exe",
-                // linkers
+                "source\\*.cpp",
+
+                // object files
+                "-o", "main.exe",
+
+                // linker flags
                 "-lm", "-lstdc++fs"
             ],
             "group": {

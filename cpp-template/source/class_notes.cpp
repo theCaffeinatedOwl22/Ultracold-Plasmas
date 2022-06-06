@@ -5,6 +5,12 @@ ClassNotes::ClassNotes(double val,double val2)
     : m_const_member{val}, m_member{val2}
 {}
 
+// delegating constructor
+ClassNotes::ClassNotes():
+    ClassNotes(1,1)
+{
+}
+
 // example of a static function
     // does not see the this pointer
     // cannot see non-static members
@@ -15,6 +21,7 @@ const std::string& ClassNotes::static_function()
 
 // example of using friend keyword
     // friends can see private members of a class and do not require :: scope resolution
+    // these are not member functions, so they do not have a this pointer
 void friendly_printer(ClassNotes& obj)
 {
     std::cout << obj.m_member << std::endl;
