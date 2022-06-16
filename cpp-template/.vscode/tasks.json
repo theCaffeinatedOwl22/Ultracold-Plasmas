@@ -6,24 +6,8 @@
         {
             "label": "Build",
             "type": "shell",
-            "command": "g++",
-            "args": [
-                // include paths
-                "-I", "source",
-
-                // compiler flags
-                "-std=c++20", "-fopenmp", "-g",
-                
-                // source files
-                "main.cpp",
-                "source\\*.cpp",
-
-                // object files
-                "-o", "main.exe",
-
-                // linker flags
-                "-lm", "-lstdc++fs", "-larmadillo"
-            ],
+            "command": "mingw32-make",
+            "args": ["FILENAME=main","FLAG=-g"],
             "group": {
                 "kind": "build",
                 "isDefault": true
