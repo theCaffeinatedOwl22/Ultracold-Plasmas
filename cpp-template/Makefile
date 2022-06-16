@@ -1,14 +1,13 @@
 # Based on http:\\make.mad-scientist.net\papers\advanced-auto-dependency-generation
-
+# input argument 
+MAINFILE ?= main
+FLAG ?= -g
 # detect operating system and update path fixing variable 
 ifeq ($(OS),Windows_NT)
 define path
 $(subst /,\,$1)
 endef
 endif
-# input argument 
-MAINFILE ?= main
-FLAG ?= -g
 # set up source, object, and dependent directories
 SRCDIR := source
 OBJDIR := objects
@@ -31,13 +30,13 @@ init :
 	@echo -------
 	@echo Sources: $(SRCS)
 	@echo -------
-	@echo Executable: $(EXEC)
+	@echo File: $(MAINFILE).cpp
 
 # set the default goal by making the target of the first rule $(EXEC)
 run : $(OBJS)
+	@$(CXX) $(CXXFLAGS) $(OBJS) -o $(OBJDIR)/run.exe $(LNKFLAGS)
 	@echo -------
-	@echo Generating Executable: $(EXEC)
-	@$(CXX) $(CXXFLAGS) $(OBJS) -o $(EXEC) $(LNKFLAGS)
+	@echo Complete
 
 $(DEPDIR) : ; @mkdir $@
 
