@@ -22,7 +22,7 @@
                 "-o", "main.exe",
 
                 // linker flags
-                "-lm", "-lstdc++fs"
+                "-lm", "-lstdc++fs", "-larmadillo"
             ],
             "group": {
                 "kind": "build",
