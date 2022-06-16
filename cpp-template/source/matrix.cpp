@@ -1,4 +1,4 @@
-#include <Matrix.hpp>
+#include <matrix.hpp>
 
 #define BINARY_LAMBDA(expr) [](const Matrix::type lhs, const Matrix::type rhs){return expr;}
 #define UNARY_LAMBDA(expr) [=](Matrix::type val){return expr;}
@@ -105,6 +105,7 @@ Matrix operator%(const Matrix& mat1, const Matrix& mat2)
     return result;
 }
 
+// returns the transpose of the matrix
 Matrix Matrix::t()
 {
     Matrix mat{zeros(m_cols,m_rows)};

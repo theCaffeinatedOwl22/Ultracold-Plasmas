@@ -19,7 +19,6 @@ public:
     static Matrix zeros(int rows, int cols) {return Matrix(rows,cols,0.0);}
     static Matrix ones(int rows, int cols) {return Matrix(rows,cols,1.0);}
     static Matrix identity(int size);
-    
     // *** Return Operators
     type& operator()(size_t row, size_t col);
     type operator()(size_t row, size_t col) const;
@@ -46,10 +45,10 @@ public:
     // *** Componentwise Matrix Operators
     friend Matrix operator+(const Matrix& mat1, const Matrix& mat2);
     friend Matrix operator-(const Matrix& mat1, const Matrix& mat2);
-    friend Matrix operator*(const Matrix& mat1, const Matrix& mat2);
+    friend Matrix operator%(const Matrix& mat1, const Matrix& mat2);
     friend Matrix operator/(const Matrix& mat1, const Matrix& mat2);
     // *** Matrix Multiplication
-    friend Matrix operator%(const Matrix& mat1, const Matrix& mat2);
+    friend Matrix operator*(const Matrix& mat1, const Matrix& mat2);
     // *** Other Operations
     Matrix t();
     // *** Getters

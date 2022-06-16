@@ -1,38 +1,5 @@
 #include "utility.hpp"
 
-// round double to int
-int round2int(const double& a) { return static_cast<int>(a < 0 ? a - 0.5 : a + 0.5); }
-
-// bin <vec_in> into <num_bins> linearly spaced bins between min and max
-std::vector<double> bin_vector(const std::vector<double>& vec_in,const std::vector<double>& bins)
-{
-    std::vector<double> num_in_bin(bins.size(),0.);
-    double bin_spacing = bins[1] - bins[0];
-    
-    #pragma omp parallel for
-    for (int i = 0; i < bins.size(); i++){ 
-        for (int j = 0; j < vec_in.size(); j++){
-            bool cond1, cond2, in_bin;
-            cond1 = vec_in[j] < (bins[i] + bin_spacing/2.); 
-            cond2 = vec_in[j] > (bins[i] - bin_spacing/2.); 
-            in_bin = cond1 && cond2;
-            if (in_bin) num_in_bin[i] += 1./vec_in.size();
-        }
-    }
-    return num_in_bin;
-}
-
-
-
-// compute the norm (i.e., square root of a vectors inner product with itself)
-double euclidean_norm(const std::vector<double>& vec_in)
-{
-    double norm;
-    for (auto val : vec_in) norm += pow(val,2.);
-    norm = sqrt(norm);
-    return norm;
-}
-
 // read file with comma delimiter - <#> functions as <,> - all white space ignored - all text in line after <%> is ignored
 std::vector<std::vector<std::string>> read_file(fs::path filePath)
 {

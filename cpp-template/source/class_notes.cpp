@@ -35,4 +35,5 @@ void ClassNotes::set_member(double val) {m_member = val;}
 
 // chainable function
     // chainable because it returns a non-const reference
+    // any operator or function that uses the class can now be chained
 ClassNotes& ClassNotes::chainable_func() {return *this;}
