@@ -13,33 +13,48 @@ FLAG ?= -g
 SRCDIR := source
 OBJDIR := objects
 DEPDIR := $(OBJDIR)/.deps
-SRCS := $(wildcard $(SRCDIR)/*.cpp) $(MAINFILE).cpp
+SRCS := $(wildcard $(SRCDIR)/*/*.cpp) $(wildcard $(SRCDIR)/*/*/*.cpp) $(MAINFILE).cpp
+HEADERS := source $(dir $(SRCS))
 OBJS := $(SRCS:%.cpp=$(OBJDIR)/%.o)
 EXEC = $(OBJDIR)/$(MAINFILE).exe
 # define flags for compilation
 CXX = g++
 CXXFLAGS = -fopenmp -std=c++20 $(FLAG)
-CPPFLAGS = -I source
+CPPFLAGS := $(patsubst %,-I %,$(HEADERS))
 LNKFLAGS = -lm -larmadillo -lstdc++fs
 DEPFLAGS = -MT $@ -MMD -MP -MF $(DEPDIR)/$*.d
 
+all : init run
+
+init :
+	@echo Headers: $(CPPFLAGS)
+	@echo -------
+	@echo Sources: $(SRCS)
+	@echo -------
+	@echo Executable: $(EXEC)
+
 # set the default goal by making the target of the first rule $(EXEC)
 run : $(OBJS)
-	$(CXX) $(CXXFLAGS) $(OBJS) -o $(EXEC) $(LNKFLAGS)
-
-# option to clean directories at the end
-clean :
-	if exist $(OBJDIR) rmdir /s /q $(OBJDIR)
+	@echo -------
+	@echo Generating Executable: $(EXEC)
+	@$(CXX) $(CXXFLAGS) $(OBJS) -o $(EXEC) $(LNKFLAGS)
 
 $(DEPDIR) : ; @mkdir $@
 
 # rule for making object files
 $(OBJDIR)/%.o : %.cpp $(DEPDIR)/%.d | $(DEPDIR)
+	@echo -------
+	@echo Compiling Object: $@ -- Dependencies: $<
 	@if not exist $(dir $@) @mkdir $(call path,$(dir $@))
-	$(CXX) $(DEPFLAGS) $(CXXFLAGS) $(CPPFLAGS) -c -o $@ $<
+	@$(CXX) $(DEPFLAGS) $(CXXFLAGS) $(CPPFLAGS) -c -o $@ $<
 
 DEPFILES := $(SRCS:%.cpp=$(DEPDIR)/%.d)
 $(DEPFILES):
 	@if not exist $(dir $@) @mkdir $(call path,$(dir $@))
 
 include $(wildcard $(DEPFILES))
+
+# option to clean directories at the end
+clean :
+	if exist $(OBJDIR) rmdir /s /q $(OBJDIR)
+	
