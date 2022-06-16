@@ -7,7 +7,7 @@
             "label": "Build",
             "type": "shell",
             "command": "mingw32-make",
-            "args": ["FILENAME=main","FLAG=-g"],
+            "args": ["FILENAME=main","FLAG=-g","SHELL=cmd"],
             "group": {
                 "kind": "build",
                 "isDefault": true
