@@ -10,4 +10,4 @@ set flag=-O3
 set files[0]=main
 set files[1]=test
 :: COMPILE ALL FILES
-mingw32-make MAINFILE=!files[%file_ind%]! FLAG=!flag!
+mingw32-make MAINFILE=!files[%file_ind%]! FLAG=!flag! SHELL=cmd

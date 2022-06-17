@@ -15,7 +15,7 @@ DEPDIR := $(OBJDIR)/.deps
 SRCS := $(wildcard $(SRCDIR)/*/*.cpp) $(wildcard $(SRCDIR)/*/*/*.cpp) $(MAINFILE).cpp
 HEADERS := source $(dir $(SRCS))
 OBJS := $(SRCS:%.cpp=$(OBJDIR)/%.o)
-EXEC = $(OBJDIR)/$(MAINFILE).exe
+EXEC = $(OBJDIR)/run.exe
 # define flags for compilation
 CXX = g++
 CXXFLAGS = -fopenmp -std=c++20 $(FLAG)
@@ -54,4 +54,3 @@ include $(wildcard $(DEPFILES))
 # option to clean directories at the end
 clean :
 	if exist $(OBJDIR) rmdir /s /q $(OBJDIR)
-	
