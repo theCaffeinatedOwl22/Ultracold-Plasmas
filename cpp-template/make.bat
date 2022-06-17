@@ -4,10 +4,18 @@ echo.
 setlocal enabledelayedexpansion
 setlocal enableextensions
 :: USER INPUT
-set file_ind=1
+set file_ind=0
 set flag=-O3
 :: LOGGED FILE NAMES
 set files[0]=main
 set files[1]=test
 :: COMPILE ALL FILES
-mingw32-make MAINFILE=!files[%file_ind%]! FLAG=!flag! SHELL=cmd
+set start=%file_ind%
+set finish=%file_ind%
+if %file_ind%==all (
+    set start=0
+    set finish=2
+)
+for /l %%i in (%start%,1,%finish%) do (
+    mingw32-make MAINFILE=!files[%%i]! FLAG=!flag! SHELL=cmd
+)
