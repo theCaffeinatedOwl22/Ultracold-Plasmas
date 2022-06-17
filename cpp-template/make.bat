@@ -1,8 +1,13 @@
-@echo off
+:: User Controls
+@ECHO OFF
+echo.
 setlocal enabledelayedexpansion
 setlocal enableextensions
-
-:: inputs
-set file=%1
-set start=%2
-set finish=%3
+:: USER INPUT
+set file_ind=1
+set flag=-O3
+:: LOGGED FILE NAMES
+set files[0]=main
+set files[1]=test
+:: COMPILE ALL FILES
+mingw32-make MAINFILE=!files[%file_ind%]! FLAG=!flag!

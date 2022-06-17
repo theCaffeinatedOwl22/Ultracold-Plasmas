@@ -1,7 +1,7 @@
 # Based on http:\\make.mad-scientist.net\papers\advanced-auto-dependency-generation
 # input argument 
 MAINFILE ?= main
-FLAG ?= -g
+FLAG ?= -O3
 # detect operating system and update path fixing variable 
 ifeq ($(OS),Windows_NT)
 define path
@@ -26,23 +26,21 @@ DEPFLAGS = -MT $@ -MMD -MP -MF $(DEPDIR)/$*.d
 all : init run
 
 init :
+	@echo -------
 	@echo Headers: $(CPPFLAGS)
-	@echo -------
 	@echo Sources: $(SRCS)
-	@echo -------
 	@echo File: $(MAINFILE).cpp
 
 # set the default goal by making the target of the first rule $(EXEC)
 run : $(OBJS)
-	@$(CXX) $(CXXFLAGS) $(OBJS) -o $(OBJDIR)/run.exe $(LNKFLAGS)
-	@echo -------
+	@$(CXX) $(CXXFLAGS) $(OBJS) -o $(EXEC) $(LNKFLAGS)
 	@echo Complete
+	@echo -------
 
 $(DEPDIR) : ; @mkdir $@
 
 # rule for making object files
 $(OBJDIR)/%.o : %.cpp $(DEPDIR)/%.d | $(DEPDIR)
-	@echo -------
 	@echo Compiling Object: $@ -- Dependencies: $<
 	@if not exist $(dir $@) @mkdir $(call path,$(dir $@))
 	@$(CXX) $(DEPFLAGS) $(CXXFLAGS) $(CPPFLAGS) -c -o $@ $<
