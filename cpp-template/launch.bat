@@ -9,10 +9,6 @@ if [%1] == [main] (
     set file=main
     set run_flag=
 )
-if [%1] == [test] (
-    set file=test
-    set run_flag=
-)
 if not [%2] == [] (
     set array_min=%2
     set array_max=%2
