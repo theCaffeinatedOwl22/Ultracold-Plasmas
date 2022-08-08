@@ -6,4 +6,5 @@ classname = class(fun);
 
 % access properties of constant classes
 import constants.cgs;
+test();
 cgs.kB
